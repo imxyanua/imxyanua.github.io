@@ -257,6 +257,7 @@ export default function App() {
     <div className="page-enter relative min-h-screen w-full bg-black text-white" key={lang}>
       <div className="film-grain" aria-hidden="true" />
       <div className="vignette" aria-hidden="true" />
+      <div className="crt-flicker" aria-hidden="true" />
 
       <div className="read-progress" aria-hidden="true">
         <span style={{ width: `${readProgress}%` }} />
@@ -271,7 +272,10 @@ export default function App() {
           aria-live="polite"
         >
           <div className="flex w-[min(72vw,280px)] flex-col items-center">
-            <div className="font-pixel text-3xl tracking-[0.2em] text-white sm:text-4xl">
+            <div
+              className="glitch font-pixel text-3xl tracking-[0.2em] text-white sm:text-4xl"
+              data-text="XYANUA"
+            >
               XYANUA
             </div>
             <div className="mt-6 h-[2px] w-full overflow-hidden bg-white/15">
@@ -353,7 +357,12 @@ export default function App() {
           <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-6 sm:gap-6 lg:grid-cols-4 lg:gap-8">
             <div>
               <h2 className="text-base leading-tight tracking-wide sm:text-lg md:text-xl">
-                <span className="font-pixel text-xl sm:text-2xl md:text-3xl">XYANUA</span>
+                <span
+                  className="glitch font-pixel text-xl sm:text-2xl md:text-3xl"
+                  data-text="XYANUA"
+                >
+                  XYANUA
+                </span>
               </h2>
               <div className="mt-2 text-[10px] text-white/50 sm:mt-3">*</div>
               <p
@@ -410,14 +419,20 @@ export default function App() {
               >
                 {t.hero.line1}
                 <br />
-                <span className="font-pixel inline-block align-baseline text-[1.25em] leading-none font-normal">
+                <span
+                  className="glitch font-pixel inline-block align-baseline text-[1.25em] leading-none font-normal"
+                  data-text={t.hero.pixel1}
+                >
                   {t.hero.pixel1}
                 </span>{' '}
                 {t.hero.mid}
                 <br />
                 {t.hero.line3}
                 <br />
-                <span className="font-pixel inline-block align-baseline text-[1.25em] leading-none font-normal">
+                <span
+                  className="glitch font-pixel inline-block align-baseline text-[1.25em] leading-none font-normal"
+                  data-text={t.hero.pixel2}
+                >
                   {t.hero.pixel2}
                 </span>
               </h1>
@@ -499,13 +514,13 @@ export default function App() {
         <div className="pointer-events-none absolute inset-0 grid-noise opacity-40" />
         <div className="relative mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-blue-400/80 uppercase`}>
+            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
               {t.aboutLabel}
             </p>
             <h2 className="mt-4 text-3xl leading-tight tracking-wide md:text-5xl">
               {t.aboutTitle1}
               <br />
-              <span className={`${labelFont} text-blue-300`}>{t.aboutTitle2}</span>
+              <span className={`${labelFont} text-emerald-300`}>{t.aboutTitle2}</span>
             </h2>
           </Reveal>
 
@@ -600,7 +615,7 @@ export default function App() {
       >
         <div className="relative mx-auto max-w-[1200px]">
           <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-blue-400/80 uppercase`}>
+            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
               {t.methodLabel}
             </p>
             <h2 className="mt-4 max-w-2xl text-3xl leading-tight tracking-wide md:text-5xl">
@@ -612,7 +627,7 @@ export default function App() {
             {t.methodSteps.map((item, i) => (
               <Reveal key={item.step} delay={i * 90}>
                 <article className="glow-card h-full border border-white/10 bg-black/40 p-6 md:p-8">
-                  <div className="font-pixel text-sm text-blue-300/80">{item.step}</div>
+                  <div className="font-pixel text-sm text-emerald-300/80">{item.step}</div>
                   <h3 className="mt-3 text-xl tracking-wide">{item.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-white/65">{item.text}</p>
                 </article>
@@ -629,7 +644,7 @@ export default function App() {
         <div className="scanline-overlay pointer-events-none absolute inset-0 opacity-30" />
         <div className="relative mx-auto max-w-[1200px]">
           <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-blue-400/80 uppercase`}>
+            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
               {t.capsLabel}
             </p>
             <h2 className="mt-4 max-w-3xl text-3xl leading-tight tracking-wide md:text-5xl">
@@ -643,7 +658,7 @@ export default function App() {
               return (
                 <Reveal key={service.title} delay={i * 70}>
                   <article className="glow-card h-full border border-white/10 bg-white/[0.02] p-6">
-                    <Icon className="text-blue-300" size={22} />
+                    <Icon className="text-emerald-300" size={22} />
                     <h3 className="mt-5 text-lg tracking-wide">{service.title}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-white/60">{service.desc}</p>
                   </article>
@@ -660,7 +675,7 @@ export default function App() {
       >
         <div className="relative mx-auto max-w-[1200px]">
           <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-blue-400/80 uppercase`}>
+            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
               {t.projectsLabel}
             </p>
             <h2 className="mt-4 text-3xl leading-tight tracking-wide md:text-5xl">
@@ -677,11 +692,11 @@ export default function App() {
                   aria-label={`${uiCase.open}: ${project.title}`}
                   className="glow-card group grid w-full gap-4 border border-white/10 bg-black/50 p-6 text-left md:grid-cols-[160px_1fr_auto] md:items-center md:p-8"
                 >
-                  <span className="font-pixel text-xs tracking-widest text-blue-300/90">
+                  <span className="font-pixel text-xs tracking-widest text-emerald-300/90">
                     {project.tag}
                   </span>
                   <div>
-                    <h3 className="text-xl tracking-wide transition-colors group-hover:text-blue-200 md:text-2xl">
+                    <h3 className="text-xl tracking-wide transition-colors group-hover:text-emerald-200 md:text-2xl">
                       {project.title}
                     </h3>
                     <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/60">
@@ -704,8 +719,8 @@ export default function App() {
       >
         <div className="relative mx-auto max-w-[1200px]">
           <Reveal>
-            <div className="border border-white/10 bg-gradient-to-br from-blue-500/10 via-transparent to-transparent p-8 md:p-12">
-              <p className={`${labelFont} text-sm tracking-widest text-blue-400/80 uppercase`}>
+            <div className="border border-white/10 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent p-8 md:p-12">
+              <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
                 {t.labLabel}
               </p>
               <h2 className="mt-4 max-w-3xl text-3xl leading-tight tracking-wide md:text-5xl">
@@ -733,7 +748,7 @@ export default function App() {
       >
         <div className="relative mx-auto max-w-[1200px]">
           <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-blue-400/80 uppercase`}>
+            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
               {t.talkLabel}
             </p>
             <h2 className="mt-4 max-w-3xl text-3xl leading-tight tracking-wide md:text-5xl">

@@ -58,7 +58,7 @@ export default function CaseStudyModal({
       >
         <div className="flex items-start justify-between gap-4 border-b border-white/10 px-5 py-4 sm:px-8 sm:py-5">
           <div>
-            <div className="font-pixel text-xs tracking-widest text-blue-300/90">{tag}</div>
+            <div className="font-pixel text-xs tracking-widest text-emerald-300/90">{tag}</div>
             <h3 className="mt-2 text-2xl tracking-wide sm:text-3xl">{title}</h3>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/60">{summary}</p>
           </div>
@@ -74,20 +74,20 @@ export default function CaseStudyModal({
 
         <div className="space-y-8 overflow-y-auto px-5 py-6 sm:px-8 sm:py-8">
           <section>
-            <h4 className={`${labelFont} text-xs tracking-widest text-blue-400/80 uppercase`}>
+            <h4 className={`${labelFont} text-xs tracking-widest text-emerald-400/80 uppercase`}>
               {ui.problem}
             </h4>
             <p className="mt-3 text-sm leading-relaxed text-white/75 sm:text-base">{detail.problem}</p>
           </section>
 
           <section>
-            <h4 className={`${labelFont} text-xs tracking-widest text-blue-400/80 uppercase`}>
+            <h4 className={`${labelFont} text-xs tracking-widest text-emerald-400/80 uppercase`}>
               {ui.approach}
             </h4>
             <ol className="mt-3 space-y-3">
               {detail.approach.map((step, i) => (
                 <li key={step} className="flex gap-3 text-sm leading-relaxed text-white/75 sm:text-base">
-                  <span className="font-pixel shrink-0 text-blue-300/80">
+                  <span className="font-pixel shrink-0 text-emerald-300/80">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <span>{step}</span>
@@ -97,7 +97,7 @@ export default function CaseStudyModal({
           </section>
 
           <section>
-            <h4 className={`${labelFont} text-xs tracking-widest text-blue-400/80 uppercase`}>
+            <h4 className={`${labelFont} text-xs tracking-widest text-emerald-400/80 uppercase`}>
               {ui.outcome}
             </h4>
             <p className="mt-3 border border-white/10 bg-white/[0.03] p-4 text-sm leading-relaxed text-white/80 sm:text-base">
@@ -106,7 +106,7 @@ export default function CaseStudyModal({
           </section>
 
           <section>
-            <h4 className={`${labelFont} text-xs tracking-widest text-blue-400/80 uppercase`}>
+            <h4 className={`${labelFont} text-xs tracking-widest text-emerald-400/80 uppercase`}>
               {ui.stack}
             </h4>
             <div className="mt-3 flex flex-wrap gap-2">
