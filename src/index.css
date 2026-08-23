@@ -1,13 +1,29 @@
 @import "tailwindcss";
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Be Vietnam Pro', 'Noto Sans SC', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
   background: #000;
   color: #fff;
+}
+
+/* Vietnamese: Be Vietnam Pro renders diacritics clearly */
+html[data-lang='vi'] body {
+  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+/* Chinese Simplified */
+html[data-lang='zh'] body {
+  font-family: 'Noto Sans SC', 'Inter', sans-serif;
+}
+
+html[data-lang='en'] body {
+  font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
 }
 
 html {
@@ -18,8 +34,26 @@ section[id] {
   scroll-margin-top: 5.5rem;
 }
 
+/* Pixel font — ASCII branding only (no Vietnamese/Chinese glyphs) */
 .font-pixel {
-  font-family: 'basis33', monospace;
+  font-family: 'basis33', 'Be Vietnam Pro', 'Noto Sans SC', monospace;
+}
+
+/* Readable tech labels for VI/ZH (and EN when needed) */
+.font-label {
+  font-family: inherit;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+html[data-lang='vi'] .font-label {
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+html[data-lang='zh'] .font-label {
+  letter-spacing: 0.06em;
+  font-weight: 500;
 }
 
 @keyframes float-glow {
@@ -94,4 +128,33 @@ section[id] {
   height: 120px;
   animation: scanline 8s linear infinite;
   opacity: 0.4;
+}
+
+@keyframes marquee-rtl {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: inline-flex;
+  width: max-content;
+  animation: marquee-rtl 14s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  padding-right: 2.5rem;
+  white-space: nowrap;
 }
