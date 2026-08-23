@@ -45,7 +45,7 @@ export type Dictionary = {
   projectsLabel: string
   projectsTitle: string
   caseStudy: string
-  projects: { tag: string; title: string; text: string }[]
+  projects: { id: string; tag: string; title: string; text: string }[]
   labLabel: string
   labTitle: string
   labBody: string
@@ -176,16 +176,19 @@ export const translations: Record<Lang, Dictionary> = {
     caseStudy: 'Case study →',
     projects: [
       {
+        id: 'pathfinder',
         tag: 'RED TEAM',
         title: 'Adversarial pathfinder',
         text: 'Chained identity + cloud misconfigs into a full tenant takeover story for a fintech stack.',
       },
       {
+        id: 'soc-copilot',
         tag: 'AI AGENT',
         title: 'SOC triage copilot',
         text: 'Agent that summarizes alerts, pulls context, and drafts containment steps with human approval gates.',
       },
       {
+        id: 'prompt-armor',
         tag: 'LLM SEC',
         title: 'Prompt armor suite',
         text: 'Regression pack for injection, data exfil, and tool-abuse cases against production chat surfaces.',
@@ -323,16 +326,19 @@ export const translations: Record<Lang, Dictionary> = {
     caseStudy: 'Case study →',
     projects: [
       {
+        id: 'pathfinder',
         tag: 'RED TEAM',
         title: 'Adversarial pathfinder',
         text: 'Nối identity + misconfig cloud thành câu chuyện chiếm toàn bộ tenant cho stack fintech.',
       },
       {
+        id: 'soc-copilot',
         tag: 'AI AGENT',
         title: 'SOC triage copilot',
         text: 'Agent tóm tắt alert, kéo ngữ cảnh và soạn bước phong tỏa với cổng duyệt của con người.',
       },
       {
+        id: 'prompt-armor',
         tag: 'LLM SEC',
         title: 'Prompt armor suite',
         text: 'Bộ regression cho injection, data exfil và tool-abuse trên bề mặt chat production.',
@@ -469,16 +475,19 @@ export const translations: Record<Lang, Dictionary> = {
     caseStudy: '案例研究 →',
     projects: [
       {
+        id: 'pathfinder',
         tag: 'RED TEAM',
         title: '对抗路径发现器',
         text: '将身份与云配置错误串联成完整租户接管故事，面向金融科技栈。',
       },
       {
+        id: 'soc-copilot',
         tag: 'AI AGENT',
         title: 'SOC 分诊副驾驶',
         text: '汇总告警、拉取上下文并起草遏制步骤，同时保留人工审批闸门。',
       },
       {
+        id: 'prompt-armor',
         tag: 'LLM SEC',
         title: 'Prompt 护甲套件',
         text: '针对生产聊天界面的注入、数据外泄与工具滥用回归测试包。',

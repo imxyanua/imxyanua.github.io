@@ -10,10 +10,13 @@ import {
   Terminal,
   Cpu,
   ArrowDown,
+  ArrowUp,
 } from 'lucide-react'
 import MusicPlayer from './MusicPlayer'
+import CaseStudyModal from './CaseStudyModal'
 import { useLanguage } from './i18n/LanguageContext'
 import { LANGS } from './i18n/translations'
+import { caseUi, cases } from './i18n/cases'
 
 const SERVICE_ICONS = [Shield, Bot, Lock, Terminal, Radar, Cpu] as const
 
@@ -86,9 +89,9 @@ function LanguageSwitch() {
           key={item.code}
           type="button"
           onClick={() => setLang(item.code)}
-          className={`px-2 py-1 text-[10px] tracking-wider transition-colors ${
+          className={`lang-btn px-2 py-1 text-[10px] tracking-wider ${
             lang === item.code
-              ? 'bg-white/15 text-white'
+              ? 'is-active bg-white/15 text-white'
               : 'text-white/50 hover:text-white/80'
           }`}
           aria-pressed={lang === item.code}
@@ -109,29 +112,61 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [loadProgress, setLoadProgress] = useState(0)
   const [loaderExit, setLoaderExit] = useState(false)
+  const [readProgress, setReadProgress] = useState(0)
+  const [activeSection, setActiveSection] = useState('top')
+  const [showTop, setShowTop] = useState(false)
+  const [activeCaseId, setActiveCaseId] = useState<string | null>(null)
+
+  const activeProject = t.projects.find((p) => p.id === activeCaseId) ?? null
+  const activeCase =
+    cases[lang].find((c) => c.id === activeCaseId) ?? null
+  const uiCase = caseUi[lang]
 
   const navLinks = [
-    { label: t.nav.about, href: '#about' },
-    { label: t.nav.method, href: '#method' },
-    { label: t.nav.projects, href: '#projects' },
-    { label: t.nav.research, href: '#research' },
-    { label: t.nav.lab, href: '#lab' },
-    { label: t.nav.talk, href: '#talk' },
+    { label: t.nav.about, href: '#about', id: 'about' },
+    { label: t.nav.method, href: '#method', id: 'method' },
+    { label: t.nav.projects, href: '#projects', id: 'projects' },
+    { label: t.nav.research, href: '#research', id: 'research' },
+    { label: t.nav.lab, href: '#lab', id: 'lab' },
+    { label: t.nav.talk, href: '#talk', id: 'talk' },
   ]
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const sectionIds = ['top', 'about', 'method', 'research', 'projects', 'lab', 'talk']
+
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 24)
+      setShowTop(y > 700)
+
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setReadProgress(max > 0 ? Math.min(100, (y / max) * 100) : 0)
+
+      const probe = y + 140
+      let current = 'top'
+      for (const id of sectionIds) {
+        const el = document.getElementById(id)
+        if (el && el.offsetTop <= probe) current = id
+      }
+      setActiveSection(current)
+    }
+
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = loading || menuOpen ? 'hidden' : ''
+    document.body.style.overflow =
+      loading || menuOpen || Boolean(activeCaseId) ? 'hidden' : ''
     return () => {
       document.body.style.overflow = ''
     }
-  }, [loading, menuOpen])
+  }, [loading, menuOpen, activeCaseId])
 
   useEffect(() => {
     let frame = 0
@@ -161,7 +196,11 @@ export default function App() {
   }, [])
 
   return (
-    <div className="relative min-h-screen w-full bg-black text-white" key={lang}>
+    <div className="page-enter relative min-h-screen w-full bg-black text-white" key={lang}>
+      <div className="read-progress" aria-hidden="true">
+        <span style={{ width: `${readProgress}%` }} />
+      </div>
+
       {loading && (
         <div
           className={`fixed inset-0 z-[100] flex items-center justify-center bg-black transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -204,7 +243,9 @@ export default function App() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm tracking-wide transition-opacity hover:opacity-70"
+                className={`nav-link text-sm tracking-wide opacity-70 ${
+                  activeSection === link.id ? 'is-active' : ''
+                }`}
               >
                 {link.label}
               </a>
@@ -494,8 +535,13 @@ export default function App() {
 
           <div className="mt-14 space-y-4">
             {t.projects.map((project, i) => (
-              <Reveal key={project.title} delay={i * 100}>
-                <article className="glow-card group grid gap-4 border border-white/10 bg-black/50 p-6 md:grid-cols-[160px_1fr_auto] md:items-center md:p-8">
+              <Reveal key={project.id} delay={i * 100}>
+                <button
+                  type="button"
+                  onClick={() => setActiveCaseId(project.id)}
+                  aria-label={`${uiCase.open}: ${project.title}`}
+                  className="glow-card group grid w-full gap-4 border border-white/10 bg-black/50 p-6 text-left md:grid-cols-[160px_1fr_auto] md:items-center md:p-8"
+                >
                   <span className="font-pixel text-xs tracking-widest text-blue-300/90">
                     {project.tag}
                   </span>
@@ -510,7 +556,7 @@ export default function App() {
                   <span className="text-xs tracking-widest text-white/40 uppercase transition-colors group-hover:text-white/70">
                     {t.caseStudy}
                   </span>
-                </article>
+                </button>
               </Reveal>
             ))}
           </div>
@@ -585,6 +631,32 @@ export default function App() {
       </footer>
 
       {!loading && <MusicPlayer />}
+
+      {activeProject && activeCase && (
+        <CaseStudyModal
+          open={Boolean(activeCaseId)}
+          onClose={() => setActiveCaseId(null)}
+          title={activeProject.title}
+          tag={activeProject.tag}
+          summary={activeProject.text}
+          detail={activeCase}
+          ui={uiCase}
+          labelFont={labelFont}
+        />
+      )}
+
+      <a
+        href="#top"
+        className={`back-top fixed bottom-24 left-4 z-40 flex h-11 w-11 items-center justify-center border border-white/20 bg-black/80 backdrop-blur-md sm:bottom-6 sm:left-6 ${
+          showTop && !loading
+            ? 'pointer-events-auto translate-y-0 opacity-100'
+            : 'pointer-events-none translate-y-3 opacity-0'
+        }`}
+        aria-label={t.backTop}
+        title={t.backTop}
+      >
+        <ArrowUp size={18} />
+      </a>
 
       <div
         className={`fixed inset-0 z-50 flex flex-col bg-black/95 backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
