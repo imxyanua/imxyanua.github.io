@@ -9,7 +9,6 @@ import {
   Lock,
   Terminal,
   Cpu,
-  ArrowDown,
   ArrowUp,
 } from 'lucide-react'
 import MusicPlayer from './MusicPlayer'
@@ -36,6 +35,52 @@ function Logo() {
         fill="white"
       />
     </svg>
+  )
+}
+
+function CountUp({ value, className = '' }: { value: number; className?: string }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const [n, setN] = useState(0)
+
+  useEffect(() => {
+    const node = ref.current
+    if (!node) return
+    let raf = 0
+    let started = false
+
+    const run = () => {
+      const start = performance.now()
+      const duration = 1100
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - start) / duration)
+        const eased = 1 - Math.pow(1 - t, 3)
+        setN(Math.round(value * eased))
+        if (t < 1) raf = requestAnimationFrame(tick)
+      }
+      raf = requestAnimationFrame(tick)
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          started = true
+          run()
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.4 },
+    )
+    observer.observe(node)
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(raf)
+    }
+  }, [value])
+
+  return (
+    <span ref={ref} className={className}>
+      {n}
+    </span>
   )
 }
 
@@ -485,23 +530,64 @@ export default function App() {
             <Reveal delay={240}>
               <div className="grid grid-cols-3 gap-4 border border-white/10 bg-white/[0.02] p-5">
                 <div>
-                  <div className="font-pixel text-2xl text-white md:text-3xl">3</div>
+                  <div className="font-pixel text-2xl text-white md:text-3xl">
+                    <CountUp value={3} />
+                  </div>
                   <div className="mt-1 text-xs tracking-wide text-white/50 uppercase">
                     {t.statOps}
                   </div>
                 </div>
                 <div>
-                  <div className="font-pixel text-2xl text-white md:text-3xl">47</div>
+                  <div className="font-pixel text-2xl text-white md:text-3xl">
+                    <CountUp value={47} />
+                  </div>
                   <div className="mt-1 text-xs tracking-wide text-white/50 uppercase">
                     {t.statRules}
                   </div>
                 </div>
                 <div>
-                  <div className="font-pixel text-2xl text-white md:text-3xl">12</div>
+                  <div className="font-pixel text-2xl text-white md:text-3xl">
+                    <CountUp value={12} />
+                  </div>
                   <div className="mt-1 text-xs tracking-wide text-white/50 uppercase">
                     {t.statAgents}
                   </div>
                 </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={300}>
+              <div className="term-card mt-6">
+                <div className="term-bar">
+                  <i />
+                  <i />
+                  <i />
+                  <span>{t.termTitle}</span>
+                </div>
+                <pre className="term-body">
+                  {t.termLines.map((line, idx) => {
+                    if (line.startsWith('$')) {
+                      return (
+                        <div key={`term-${idx}`}>
+                          <span className="c">$</span>
+                          <span className={line.includes('_') ? 'dim' : undefined}>
+                            {line.slice(1)}
+                          </span>
+                        </div>
+                      )
+                    }
+                    if (line.startsWith('▸')) {
+                      return (
+                        <div key={`term-${idx}`}>
+                          <span className="g">▸</span>
+                          {line.slice(1)}
+                        </div>
+                      )
+                    }
+                    if (line === '') return <div key={`term-${idx}`}>&nbsp;</div>
+                    return <div key={`term-${idx}`}>{line}</div>
+                  })}
+                </pre>
               </div>
             </Reveal>
           </div>

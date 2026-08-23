@@ -40,6 +40,8 @@ export type Dictionary = {
   statOps: string
   statRules: string
   statAgents: string
+  termTitle: string
+  termLines: string[]
   methodLabel: string
   methodTitle: string
   methodSteps: { step: string; title: string; text: string }[]
@@ -142,6 +144,19 @@ export const translations: Record<Lang, Dictionary> = {
     statOps: 'Red team ops',
     statRules: 'Detection rules',
     statAgents: 'AI agents',
+    termTitle: 'xyanua — zsh',
+    termLines: [
+      '$ whoami',
+      'xyanua',
+      '',
+      '$ cat ~/.focus',
+      '▸ red teaming & threat modeling',
+      '▸ AI agent engineering',
+      '▸ LLM security / prompt defense',
+      '▸ detection engineering / SOAR',
+      '',
+      '$ _',
+    ],
     methodLabel: '02 — Method',
     methodTitle: 'How engagements actually move',
     methodSteps: [
@@ -311,6 +326,19 @@ export const translations: Record<Lang, Dictionary> = {
     statOps: 'Chiến dịch red team',
     statRules: 'Detection rules',
     statAgents: 'AI agents',
+    termTitle: 'xyanua — zsh',
+    termLines: [
+      '$ whoami',
+      'xyanua',
+      '',
+      '$ cat ~/.focus',
+      '▸ red teaming & threat modeling',
+      '▸ AI agent engineering',
+      '▸ bảo mật LLM / prompt defense',
+      '▸ detection engineering / SOAR',
+      '',
+      '$ _',
+    ],
     methodLabel: '02 — Phương pháp',
     methodTitle: 'Engagement thực tế diễn ra thế nào',
     methodSteps: [
@@ -479,6 +507,19 @@ export const translations: Record<Lang, Dictionary> = {
     statOps: '红队行动',
     statRules: '检测规则',
     statAgents: 'AI Agents',
+    termTitle: 'xyanua — zsh',
+    termLines: [
+      '$ whoami',
+      'xyanua',
+      '',
+      '$ cat ~/.focus',
+      '▸ red teaming & threat modeling',
+      '▸ AI agent engineering',
+      '▸ LLM 安全 / prompt defense',
+      '▸ detection engineering / SOAR',
+      '',
+      '$ _',
+    ],
     methodLabel: '02 — 方法',
     methodTitle: '真实项目如何推进',
     methodSteps: [
