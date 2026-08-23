@@ -17,6 +17,7 @@ import CaseStudyModal from './CaseStudyModal'
 import { useLanguage } from './i18n/LanguageContext'
 import { LANGS } from './i18n/translations'
 import { caseUi, cases } from './i18n/cases'
+import { CONTACT, mailtoHref } from './contact'
 
 const SERVICE_ICONS = [Shield, Bot, Lock, Terminal, Radar, Cpu] as const
 
@@ -116,11 +117,23 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('top')
   const [showTop, setShowTop] = useState(false)
   const [activeCaseId, setActiveCaseId] = useState<string | null>(null)
+  const [emailCopied, setEmailCopied] = useState(false)
 
   const activeProject = t.projects.find((p) => p.id === activeCaseId) ?? null
   const activeCase =
     cases[lang].find((c) => c.id === activeCaseId) ?? null
   const uiCase = caseUi[lang]
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(CONTACT.email)
+      setEmailCopied(true)
+      window.setTimeout(() => setEmailCopied(false), 1800)
+    } catch {
+      // fallback: open mailto if clipboard blocked
+      window.location.href = mailtoHref()
+    }
+  }
 
   const navLinks = [
     { label: t.nav.about, href: '#about', id: 'about' },
@@ -382,7 +395,10 @@ export default function App() {
             <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/10 pt-4">
               <p className="text-xs text-white/60">
                 {t.openToWork}{' '}
-                <a href="#talk" className="text-red-500 transition-colors hover:text-red-400">
+                <a
+                  href={mailtoHref()}
+                  className="text-red-500 transition-colors hover:text-red-400"
+                >
                   {t.scheduleCall}
                 </a>
               </p>
@@ -605,16 +621,60 @@ export default function App() {
               {t.talkTitle}
             </h2>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65">{t.talkBody}</p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <a
-                href="mailto:hello@xyanua.dev"
-                className="border border-red-500/60 bg-red-500/10 px-6 py-3 text-sm tracking-wider text-red-400 transition-colors hover:bg-red-500/20 hover:text-red-300"
-              >
-                {t.scheduleCta}
-              </a>
+
+            <div className="mt-8">
+              <p className={`${labelFont} text-xs tracking-widest text-white/45 uppercase`}>
+                {t.contactChannels}
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <div className="glow-card border border-white/10 bg-black/40 p-5">
+                  <div className="text-xs tracking-widest text-white/45 uppercase">
+                    {t.contactEmail}
+                  </div>
+                  <a
+                    href={mailtoHref()}
+                    className="mt-2 block text-lg text-white transition-colors hover:text-blue-200"
+                  >
+                    {CONTACT.email}
+                  </a>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <a
+                      href={mailtoHref()}
+                      className="border border-red-500/60 bg-red-500/10 px-4 py-2 text-xs tracking-wider text-red-400 transition-colors hover:bg-red-500/20"
+                    >
+                      {t.scheduleCta}
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => void copyEmail()}
+                      className="border border-white/20 px-4 py-2 text-xs tracking-wider text-white/80 transition-colors hover:bg-white/5"
+                    >
+                      {emailCopied ? t.contactCopied : t.contactCopy}
+                    </button>
+                  </div>
+                </div>
+
+                <a
+                  href={CONTACT.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glow-card border border-white/10 bg-black/40 p-5 transition-colors hover:border-blue-400/40"
+                >
+                  <div className="text-xs tracking-widest text-white/45 uppercase">
+                    {t.contactGithub}
+                  </div>
+                  <div className="mt-2 text-lg text-white">github.com/imxyanua</div>
+                  <div className="mt-4 text-xs tracking-wider text-blue-300/80">
+                    {t.contactOpenProfile}
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div className="mt-8">
               <a
                 href="#top"
-                className="border border-white/25 px-6 py-3 text-sm tracking-wider text-white/80 transition-colors hover:bg-white/5 hover:text-white"
+                className="inline-flex border border-white/25 px-6 py-3 text-sm tracking-wider text-white/80 transition-colors hover:bg-white/5 hover:text-white"
               >
                 {t.backTop}
               </a>

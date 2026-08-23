@@ -54,6 +54,12 @@ export type Dictionary = {
   talkTitle: string
   talkBody: string
   scheduleCta: string
+  contactEmail: string
+  contactGithub: string
+  contactCopy: string
+  contactCopied: string
+  contactChannels: string
+  contactOpenProfile: string
   backTop: string
   footerStats: string
   audio: string
@@ -204,7 +210,13 @@ export const translations: Record<Lang, Dictionary> = {
       "Need a sharper security edge — or an AI agent that doesn't freestyle into production risk?",
     talkBody:
       "Open to freelance, contract, or full-time. Tell me what you're defending and we'll scope the adversarial angle fast.",
-    scheduleCta: 'SCHEDULE A CALL',
+    scheduleCta: 'EMAIL ME',
+    contactEmail: 'Email',
+    contactGithub: 'GitHub',
+    contactCopy: 'Copy email',
+    contactCopied: 'Copied',
+    contactChannels: 'Direct channels',
+    contactOpenProfile: 'Open profile →',
     backTop: 'BACK TO TOP',
     footerStats: '3 red team ops • 47 detection rules • 12 AI agents',
     audio: 'AUDIO',
@@ -354,7 +366,13 @@ export const translations: Record<Lang, Dictionary> = {
       'Cần cạnh bảo mật sắc hơn — hoặc một AI agent không tự ý tạo rủi ro production?',
     talkBody:
       'Nhận freelance, hợp đồng hoặc full-time. Cho tôi biết bạn đang bảo vệ gì, chúng ta sẽ khoanh góc adversarial nhanh.',
-    scheduleCta: 'ĐẶT LỊCH GỌI',
+    scheduleCta: 'GỬI EMAIL',
+    contactEmail: 'Email',
+    contactGithub: 'GitHub',
+    contactCopy: 'Sao chép email',
+    contactCopied: 'Đã sao chép',
+    contactChannels: 'Kênh liên hệ',
+    contactOpenProfile: 'Mở hồ sơ →',
     backTop: 'VỀ ĐẦU TRANG',
     footerStats: '3 chiến dịch red team • 47 detection rules • 12 AI agents',
     audio: 'AUDIO',
@@ -500,7 +518,13 @@ export const translations: Record<Lang, Dictionary> = {
     talkLabel: '联系',
     talkTitle: '需要更锋利的安全优势 — 或一个不会在生产环境自由发挥的 AI Agent？',
     talkBody: '可接受自由职业、合同制或全职。告诉我你在防护什么，我们会快速框定对抗视角。',
-    scheduleCta: '预约通话',
+    scheduleCta: '发送邮件',
+    contactEmail: '邮箱',
+    contactGithub: 'GitHub',
+    contactCopy: '复制邮箱',
+    contactCopied: '已复制',
+    contactChannels: '联系渠道',
+    contactOpenProfile: '打开主页 →',
     backTop: '回到顶部',
     footerStats: '3 次红队行动 • 47 条检测规则 • 12 个 AI Agent',
     audio: '音频',
