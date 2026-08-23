@@ -294,13 +294,15 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
 
         <div className="relative z-10 flex flex-1 flex-col">
-          <div className="mt-4 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4 lg:gap-8">
+          <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-6 lg:grid-cols-4 lg:gap-8">
             <div>
-              <h2 className="text-lg leading-tight tracking-wide md:text-xl">
-                <span className="font-pixel text-2xl md:text-3xl">XYANUA</span>
+              <h2 className="text-base leading-tight tracking-wide sm:text-lg md:text-xl">
+                <span className="font-pixel text-xl sm:text-2xl md:text-3xl">XYANUA</span>
               </h2>
-              <div className="mt-3 text-[10px] text-white/50">*</div>
-              <p className={`${labelFont} mt-1 text-xs leading-relaxed text-white/60`}>
+              <div className="mt-2 text-[10px] text-white/50 sm:mt-3">*</div>
+              <p
+                className={`${labelFont} mt-1 hidden text-xs leading-relaxed text-white/60 sm:block`}
+              >
                 {t.brandBlurb[0]}
                 <br />
                 {t.brandBlurb[1]}
@@ -312,14 +314,15 @@ export default function App() {
             </div>
 
             <div className="text-right lg:text-left">
-              <h2 className="text-lg leading-tight tracking-wide md:text-xl">
+              <h2 className="text-base leading-tight tracking-wide sm:text-lg md:text-xl">
                 <span className="font-normal">{t.roleLine1}</span>
                 <br />
-                <span className="font-pixel text-2xl md:text-3xl">{t.roleLine2}</span>
+                <span className="font-pixel text-xl sm:text-2xl md:text-3xl">{t.roleLine2}</span>
               </h2>
             </div>
 
-            <div>
+            {/* Keep hero light on phones — full detail lives in lower sections */}
+            <div className="hidden lg:block">
               <div
                 className={`${labelFont} mb-3 text-base tracking-widest text-white/50 uppercase`}
               >
@@ -328,7 +331,7 @@ export default function App() {
               <p className="max-w-[220px] text-sm leading-relaxed text-white/90">{t.whatIDoBody}</p>
             </div>
 
-            <div className="text-right lg:text-left">
+            <div className="hidden text-right lg:block lg:text-left">
               <div
                 className={`${labelFont} mb-3 text-base tracking-widest text-white/50 uppercase`}
               >
@@ -347,8 +350,8 @@ export default function App() {
           <div className="pb-8">
             <div className="grid grid-cols-1 items-end gap-4 sm:gap-6 lg:grid-cols-2">
               <h1
-                className="text-3xl font-normal tracking-wide uppercase sm:text-4xl md:text-5xl lg:text-[3.75rem] xl:text-[4.25rem]"
-                style={{ lineHeight: 0.72 }}
+                className="text-[1.7rem] font-normal tracking-wide uppercase sm:text-4xl md:text-5xl lg:text-[3.75rem] xl:text-[4.25rem]"
+                style={{ lineHeight: 0.78 }}
               >
                 {t.hero.line1}
                 <br />
@@ -373,16 +376,16 @@ export default function App() {
                   <span className="text-sm tracking-wider">{t.enterBriefing}</span>
                 </a>
 
-                <div className="flex flex-wrap items-stretch gap-2 self-start text-sm text-white/80 sm:gap-3 lg:self-end">
-                  <div className="flex items-center gap-2 bg-[#0B0B0B] px-3 py-2 sm:px-4">
+                <div className="flex max-w-full flex-wrap items-stretch gap-2 self-start text-sm text-white/80 sm:gap-3 lg:self-end">
+                  <div className="flex items-center gap-2 bg-[#0B0B0B] px-2.5 py-1.5 sm:px-4 sm:py-2">
                     <span className="text-sm font-bold tracking-tight sm:text-base">OSCP</span>
                     <span className="text-xs text-white/50">x1</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-[#0B0B0B] px-3 py-2 sm:px-4">
-                    <span className="text-lg font-bold sm:text-xl">HTB</span>
+                  <div className="flex items-center gap-2 bg-[#0B0B0B] px-2.5 py-1.5 sm:px-4 sm:py-2">
+                    <span className="text-base font-bold sm:text-xl">HTB</span>
                     <span className="text-xs text-white/50">x47</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-[#0B0B0B] px-3 py-2 sm:px-4">
+                  <div className="flex items-center gap-2 bg-[#0B0B0B] px-2.5 py-1.5 sm:px-4 sm:py-2">
                     <span className="text-[10px] font-bold tracking-tight sm:text-xs">
                       AI RedTeam
                     </span>

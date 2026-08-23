@@ -189,7 +189,11 @@ export default function MusicPlayer() {
           </div>
         )}
 
-        <div className="flex items-center gap-2 border border-white/20 bg-black/80 p-1.5 backdrop-blur-md">
+        <div
+          className={`flex items-center gap-2 border border-white/20 bg-black/80 p-1.5 backdrop-blur-md transition-[border-color] duration-300 ${
+            playing ? 'music-playing' : ''
+          }`}
+        >
           <button
             type="button"
             onClick={toggle}
@@ -213,8 +217,17 @@ export default function MusicPlayer() {
           </button>
 
           <div className="hidden w-[200px] pr-3 sm:block">
-            <div className={`${labelFont} text-[10px] tracking-widest text-white/50`}>
-              {t.audio}
+            <div className="flex items-center gap-2">
+              <div className={`${labelFont} text-[10px] tracking-widest text-white/50`}>
+                {t.audio}
+              </div>
+              {playing && (
+                <div className="music-eq" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              )}
             </div>
             <div className="marquee mt-0.5 text-[11px] tracking-wide text-white/80" title={label}>
               <div className="marquee-track" key={`${trackIndex}-${playing}`}>
