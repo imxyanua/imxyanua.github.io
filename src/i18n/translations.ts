@@ -25,9 +25,13 @@ export type Dictionary = {
     pixel2: string
   }
   enterBriefing: string
+  aboutCta: string
   openToWork: string
   scheduleCall: string
   scroll: string
+  basedIn: string
+  basedInVal: string
+  marqueeItems: string[]
   aboutLabel: string
   aboutTitle1: string
   aboutTitle2: string
@@ -112,10 +116,23 @@ export const translations: Record<Lang, Dictionary> = {
       pixel2: 'SYSTEMS',
     },
     enterBriefing: 'ENTER BRIEFING',
+    aboutCta: 'About me',
     openToWork: 'Open to freelance, contract or full-time.',
     scheduleCall: 'Schedule a call',
     scroll: 'Scroll',
-    aboutLabel: 'About',
+    basedIn: 'Based in',
+    basedInVal: 'Vietnam',
+    marqueeItems: [
+      'Red Teaming',
+      'Threat Modeling',
+      'AI Agents',
+      'LLM Security',
+      'Detection Engineering',
+      'SIEM / SOAR',
+      'Secure Apps',
+      'Adversarial Thinking',
+    ],
+    aboutLabel: '01 — About',
     aboutTitle1: 'Operator mindset.',
     aboutTitle2: 'Builder instincts.',
     aboutP1:
@@ -125,7 +142,7 @@ export const translations: Record<Lang, Dictionary> = {
     statOps: 'Red team ops',
     statRules: 'Detection rules',
     statAgents: 'AI agents',
-    methodLabel: 'Method',
+    methodLabel: '02 — Method',
     methodTitle: 'How engagements actually move',
     methodSteps: [
       {
@@ -149,7 +166,7 @@ export const translations: Record<Lang, Dictionary> = {
         text: 'Track MTTD/MTTR, false positives, and agent eval scores so security keeps compounding.',
       },
     ],
-    capsLabel: 'Capabilities',
+    capsLabel: '03 — Capabilities',
     capsTitle: 'Security depth meets AI systems work',
     services: [
       {
@@ -177,7 +194,7 @@ export const translations: Record<Lang, Dictionary> = {
         desc: 'Response automation that shortens dwell time without waking the whole on-call rotation.',
       },
     ],
-    projectsLabel: 'Selected work',
+    projectsLabel: '04 — Selected work',
     projectsTitle: 'Signals from the lab',
     caseStudy: 'Case study →',
     projects: [
@@ -200,12 +217,12 @@ export const translations: Record<Lang, Dictionary> = {
         text: 'Regression pack for injection, data exfil, and tool-abuse cases against production chat surfaces.',
       },
     ],
-    labLabel: 'Lab',
+    labLabel: '05 — Lab',
     labTitle: 'Experiments on agents, detections, and exploit chains',
     labBody:
       'A living notebook of prompt-defense benches, SIEM rule packs, and red-team notes. More fragments shipping soon.',
     labTags: ['Prompt injection corpus', 'Cloud attack graphs', 'Agent eval harness'],
-    talkLabel: 'Talk',
+    talkLabel: '06 — Talk',
     talkTitle:
       "Need a sharper security edge — or an AI agent that doesn't freestyle into production risk?",
     talkBody:
@@ -268,10 +285,23 @@ export const translations: Record<Lang, Dictionary> = {
       pixel2: 'SYSTEMS',
     },
     enterBriefing: 'VÀO BRIEFING',
+    aboutCta: 'Giới thiệu',
     openToWork: 'Nhận freelance, hợp đồng hoặc full-time.',
     scheduleCall: 'Đặt lịch gọi',
     scroll: 'Cuộn xuống',
-    aboutLabel: 'Giới thiệu',
+    basedIn: 'Đặt tại',
+    basedInVal: 'Việt Nam',
+    marqueeItems: [
+      'Red Teaming',
+      'Threat Modeling',
+      'AI Agents',
+      'LLM Security',
+      'Detection Engineering',
+      'SIEM / SOAR',
+      'Secure Apps',
+      'Adversarial Thinking',
+    ],
+    aboutLabel: '01 — Giới thiệu',
     aboutTitle1: 'Tư duy operator.',
     aboutTitle2: 'Bản năng builder.',
     aboutP1:
@@ -281,7 +311,7 @@ export const translations: Record<Lang, Dictionary> = {
     statOps: 'Chiến dịch red team',
     statRules: 'Detection rules',
     statAgents: 'AI agents',
-    methodLabel: 'Phương pháp',
+    methodLabel: '02 — Phương pháp',
     methodTitle: 'Engagement thực tế diễn ra thế nào',
     methodSteps: [
       {
@@ -305,7 +335,7 @@ export const translations: Record<Lang, Dictionary> = {
         text: 'Theo dõi MTTD/MTTR, false positive và điểm eval agent để bảo mật tiếp tục cộng dồn.',
       },
     ],
-    capsLabel: 'Năng lực',
+    capsLabel: '03 — Năng lực',
     capsTitle: 'Chiều sâu bảo mật gặp công việc hệ thống AI',
     services: [
       {
@@ -333,7 +363,7 @@ export const translations: Record<Lang, Dictionary> = {
         desc: 'Tự động hóa phản ứng rút ngắn dwell time mà không đánh thức cả vòng on-call.',
       },
     ],
-    projectsLabel: 'Công việc chọn lọc',
+    projectsLabel: '04 — Công việc chọn lọc',
     projectsTitle: 'Tín hiệu từ lab',
     caseStudy: 'Case study →',
     projects: [
@@ -356,12 +386,12 @@ export const translations: Record<Lang, Dictionary> = {
         text: 'Bộ regression cho injection, data exfil và tool-abuse trên bề mặt chat production.',
       },
     ],
-    labLabel: 'Lab',
+    labLabel: '05 — Lab',
     labTitle: 'Thí nghiệm về agents, detections và chuỗi exploit',
     labBody:
       'Sổ tay sống về prompt-defense benches, bộ rule SIEM và ghi chú red-team. Thêm mảnh sẽ ra mắt sớm.',
     labTags: ['Corpus prompt injection', 'Đồ thị tấn công cloud', 'Harness eval agent'],
-    talkLabel: 'Liên hệ',
+    talkLabel: '06 — Liên hệ',
     talkTitle:
       'Cần cạnh bảo mật sắc hơn — hoặc một AI agent không tự ý tạo rủi ro production?',
     talkBody:
@@ -423,10 +453,23 @@ export const translations: Record<Lang, Dictionary> = {
       pixel2: 'SYSTEMS',
     },
     enterBriefing: '进入简报',
+    aboutCta: '关于我',
     openToWork: '可接受自由职业、合同制或全职。',
     scheduleCall: '预约通话',
     scroll: '向下滚动',
-    aboutLabel: '关于',
+    basedIn: '所在地',
+    basedInVal: '越南',
+    marqueeItems: [
+      'Red Teaming',
+      'Threat Modeling',
+      'AI Agents',
+      'LLM Security',
+      'Detection Engineering',
+      'SIEM / SOAR',
+      'Secure Apps',
+      'Adversarial Thinking',
+    ],
+    aboutLabel: '01 — 关于',
     aboutTitle1: '行动者思维。',
     aboutTitle2: '构建者本能。',
     aboutP1:
@@ -436,7 +479,7 @@ export const translations: Record<Lang, Dictionary> = {
     statOps: '红队行动',
     statRules: '检测规则',
     statAgents: 'AI Agents',
-    methodLabel: '方法',
+    methodLabel: '02 — 方法',
     methodTitle: '真实项目如何推进',
     methodSteps: [
       {
@@ -460,7 +503,7 @@ export const translations: Record<Lang, Dictionary> = {
         text: '跟踪 MTTD/MTTR、误报与 Agent 评估分数，让安全能力持续累积。',
       },
     ],
-    capsLabel: '能力',
+    capsLabel: '03 — 能力',
     capsTitle: '安全深度遇上 AI 系统工程',
     services: [
       {
@@ -488,7 +531,7 @@ export const translations: Record<Lang, Dictionary> = {
         desc: '缩短驻留时间的响应自动化，又不会吵醒整个值班轮转。',
       },
     ],
-    projectsLabel: '精选作品',
+    projectsLabel: '04 — 精选作品',
     projectsTitle: '来自实验室的信号',
     caseStudy: '案例研究 →',
     projects: [
@@ -511,11 +554,11 @@ export const translations: Record<Lang, Dictionary> = {
         text: '针对生产聊天界面的注入、数据外泄与工具滥用回归测试包。',
       },
     ],
-    labLabel: '实验室',
+    labLabel: '05 — 实验室',
     labTitle: '关于 Agent、检测与利用链的实验',
     labBody: '持续更新的提示防护基准、SIEM 规则包与红队笔记。更多片段即将发布。',
     labTags: ['提示注入语料', '云攻击图', 'Agent 评估框架'],
-    talkLabel: '联系',
+    talkLabel: '06 — 联系',
     talkTitle: '需要更锋利的安全优势 — 或一个不会在生产环境自由发挥的 AI Agent？',
     talkBody: '可接受自由职业、合同制或全职。告诉我你在防护什么，我们会快速框定对抗视角。',
     scheduleCta: '发送邮件',

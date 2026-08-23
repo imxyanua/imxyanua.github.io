@@ -210,6 +210,9 @@ export default function App() {
 
   return (
     <div className="page-enter relative min-h-screen w-full bg-black text-white" key={lang}>
+      <div className="film-grain" aria-hidden="true" />
+      <div className="vignette" aria-hidden="true" />
+
       <div className="read-progress" aria-hidden="true">
         <span style={{ width: `${readProgress}%` }} />
       </div>
@@ -294,7 +297,15 @@ export default function App() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
 
         <div className="relative z-10 flex flex-1 flex-col">
-          <div className="mt-2 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-6 lg:grid-cols-4 lg:gap-8">
+          <p className="mt-2 flex items-center text-xs tracking-[0.18em] text-white/70 uppercase sm:mt-4">
+            <span className="hero-tick" aria-hidden="true" />
+            <span>
+              {t.roleLine1.replace('&', '').trim()} <span className="text-white/35">×</span>{' '}
+              {t.roleLine2}
+            </span>
+          </p>
+
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-6 sm:gap-6 lg:grid-cols-4 lg:gap-8">
             <div>
               <h2 className="text-base leading-tight tracking-wide sm:text-lg md:text-xl">
                 <span className="font-pixel text-xl sm:text-2xl md:text-3xl">XYANUA</span>
@@ -321,7 +332,6 @@ export default function App() {
               </h2>
             </div>
 
-            {/* Keep hero light on phones — full detail lives in lower sections */}
             <div className="hidden lg:block">
               <div
                 className={`${labelFont} mb-3 text-base tracking-widest text-white/50 uppercase`}
@@ -368,13 +378,18 @@ export default function App() {
               </h1>
 
               <div className="flex flex-col justify-end gap-4 sm:gap-6">
-                <a
-                  href="#about"
-                  className="flex items-center gap-3 self-start border border-white/30 bg-white/5 px-6 py-3 backdrop-blur-sm transition-colors hover:bg-white/10"
-                >
-                  <Play size={14} fill="white" />
-                  <span className="text-sm tracking-wider">{t.enterBriefing}</span>
-                </a>
+                <div className="flex flex-wrap items-center gap-3 self-start">
+                  <a
+                    href="#about"
+                    className="flex items-center gap-3 border border-white/30 bg-white/5 px-6 py-3 backdrop-blur-sm transition-colors hover:bg-white/10"
+                  >
+                    <Play size={14} fill="white" />
+                    <span className="text-sm tracking-wider">{t.enterBriefing}</span>
+                  </a>
+                  <a href="#about" className="btn-ghost">
+                    {t.aboutCta}
+                  </a>
+                </div>
 
                 <div className="flex max-w-full flex-wrap items-stretch gap-2 self-start text-sm text-white/80 sm:gap-3 lg:self-end">
                   <div className="flex items-center gap-2 bg-[#0B0B0B] px-2.5 py-1.5 sm:px-4 sm:py-2">
@@ -395,27 +410,42 @@ export default function App() {
               </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/10 pt-4">
-              <p className="text-xs text-white/60">
-                {t.openToWork}{' '}
-                <a
-                  href={mailtoHref()}
-                  className="text-red-500 transition-colors hover:text-red-400"
-                >
-                  {t.scheduleCall}
-                </a>
-              </p>
-              <a
-                href="#about"
-                className="hidden items-center gap-2 text-xs tracking-widest text-white/50 uppercase transition-colors hover:text-white sm:flex"
-              >
-                {t.scroll}
-                <ArrowDown size={14} className="animate-bounce" />
+            <div className="mt-6 flex items-end justify-between gap-4 border-t border-white/10 pt-4">
+              <div className="space-y-2">
+                <p className="text-xs text-white/60">
+                  {t.openToWork}{' '}
+                  <a
+                    href={mailtoHref()}
+                    className="text-red-500 transition-colors hover:text-red-400"
+                  >
+                    {t.scheduleCall}
+                  </a>
+                </p>
+                <p className="text-[11px] tracking-wide text-white/40">
+                  <span className="text-white/30">{t.basedIn}</span> {t.basedInVal}
+                </p>
+              </div>
+              <a href="#about" className="scroll-hint hidden sm:flex">
+                <span>{t.scroll}</span>
+                <span className="scroll-hint-line" aria-hidden="true">
+                  <i />
+                </span>
               </a>
             </div>
           </div>
         </div>
       </section>
+
+      <div className="skills-marquee" aria-hidden="true">
+        <div className="skills-marquee-track">
+          {[...t.marqueeItems, ...t.marqueeItems].map((item, i) => (
+            <span key={`${item}-${i}`} className="skills-marquee-item">
+              {item}
+              <span className="dot">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
 
       <section
         id="about"
