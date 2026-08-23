@@ -741,56 +741,84 @@ export default function App() {
             </h2>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65">{t.talkBody}</p>
 
-            <div className="mt-8">
-              <p className={`${labelFont} text-xs tracking-widest text-white/45 uppercase`}>
+            <div className="mt-10 max-w-3xl">
+              <p className={`${labelFont} mb-2 text-xs tracking-widest text-white/45 uppercase`}>
                 {t.contactChannels}
               </p>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <div className="glow-card border border-white/10 bg-black/40 p-5">
-                  <div className="text-xs tracking-widest text-white/45 uppercase">
-                    {t.contactEmail}
-                  </div>
-                  <a
-                    href={mailtoHref()}
-                    className="mt-2 block text-lg text-white transition-colors hover:text-blue-200"
-                  >
-                    {CONTACT.email}
-                  </a>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <a
-                      href={mailtoHref()}
-                      className="border border-red-500/60 bg-red-500/10 px-4 py-2 text-xs tracking-wider text-red-400 transition-colors hover:bg-red-500/20"
-                    >
-                      {t.scheduleCta}
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => void copyEmail()}
-                      className="border border-white/20 px-4 py-2 text-xs tracking-wider text-white/80 transition-colors hover:bg-white/5"
-                    >
-                      {emailCopied ? t.contactCopied : t.contactCopy}
-                    </button>
-                  </div>
-                </div>
 
-                <a
-                  href={CONTACT.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="glow-card border border-white/10 bg-black/40 p-5 transition-colors hover:border-blue-400/40"
+              <a href={mailtoHref()} className="social-row group">
+                <span className="social-row__n">01</span>
+                <span className="social-row__name">{t.contactEmail}</span>
+                <span className="social-row__handle">{CONTACT.email}</span>
+                <svg
+                  className="social-row__arw"
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
                 >
-                  <div className="text-xs tracking-widest text-white/45 uppercase">
-                    {t.contactGithub}
-                  </div>
-                  <div className="mt-2 text-lg text-white">github.com/imxyanua</div>
-                  <div className="mt-4 text-xs tracking-wider text-blue-300/80">
-                    {t.contactOpenProfile}
-                  </div>
-                </a>
-              </div>
+                  <path
+                    d="M7 17L17 7M9 7h8v8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href={CONTACT.github}
+                target="_blank"
+                rel="noreferrer"
+                className="social-row group"
+              >
+                <span className="social-row__n">02</span>
+                <span className="social-row__name">{t.contactGithub}</span>
+                <span className="social-row__handle">github.com/imxyanua</span>
+                <svg
+                  className="social-row__arw"
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7 17L17 7M9 7h8v8"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+
+              <button type="button" onClick={() => void copyEmail()} className="social-row w-full text-left">
+                <span className="social-row__n">03</span>
+                <span className="social-row__name">{emailCopied ? t.contactCopied : t.contactCopy}</span>
+                <span className="social-row__handle">{CONTACT.email}</span>
+                <svg
+                  className="social-row__arw"
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M8 8h10v10M8 8l10 10"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-10">
               <a
                 href="#top"
                 className="inline-flex border border-white/25 px-6 py-3 text-sm tracking-wider text-white/80 transition-colors hover:bg-white/5 hover:text-white"

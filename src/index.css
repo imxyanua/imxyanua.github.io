@@ -512,6 +512,59 @@ html[data-lang='zh'] .font-label {
   color: rgba(255, 255, 255, 0.35);
 }
 
+.social-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.15rem 0.25rem;
+  transition:
+    background-color 0.25s ease,
+    padding-left 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.social-row:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(147, 197, 253, 0.25);
+  padding-left: 0.65rem;
+}
+
+.social-row__n {
+  font-family: 'basis33', monospace;
+  font-size: 0.85rem;
+  color: rgba(147, 197, 253, 0.85);
+  min-width: 2rem;
+}
+
+.social-row__name {
+  min-width: 5.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.social-row__handle {
+  flex: 1;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.social-row__arw {
+  color: rgba(255, 255, 255, 0.45);
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+.social-row:hover .social-row__arw {
+  color: #93c5fd;
+  transform: translate(2px, -2px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
