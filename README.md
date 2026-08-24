@@ -1,32 +1,40 @@
-# React + TypeScript + Vite
+# xyanua — personal portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Cybersecurity & AI engineer portfolio for [imxyanua.github.io](https://imxyanua.github.io/).
 
-Currently, two official plugins are available:
+Built with React 19, TypeScript, Vite, and Tailwind CSS v4. Deployed to GitHub Pages via Actions.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- CRT / terminal aesthetic with deferred Pexels hero video (720p/1080p) + local backdrop fallback
+- VI / EN / ZH i18n with persisted language preference
+- Case-study modals, contact channels, optional YouTube music (loads only on play)
+- Open Graph / Twitter cards, `robots.txt`, and sitemap
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Develop
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Build & preview
+
+```bash
+npm run build
+npm run preview
+```
+
+## Smoke check
+
+```bash
+npm run smoke
+```
+
+Runs a Playwright headless pass against the production build: home render, language switch, case modal open/close.
+
+## Stack notes
+
+- User site (`imxyanua.github.io`) is served from domain root (`base: '/'` in Vite).
+- Pixel/terminal labels use Google Fonts **VT323** (self-contained CDN; no onlinewebfonts dependency).
+- YouTube IFrame API is not requested until the visitor presses play.

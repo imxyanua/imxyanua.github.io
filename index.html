@@ -10,6 +10,7 @@
       content="xyanua — cybersecurity & AI engineer. Red teaming, detection engineering, and adversarial-ready AI agents for high-stakes systems."
     />
     <meta name="theme-color" content="#000000" />
+    <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://imxyanua.github.io/" />
 
     <meta property="og:type" content="website" />
@@ -22,6 +23,9 @@
     <meta property="og:image" content="https://imxyanua.github.io/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="vi_VN" />
+    <meta property="og:locale:alternate" content="zh_CN" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="xyanua - Cybersecurity & AI Engineer" />
@@ -34,13 +38,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700&family=VT323&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://db.onlinewebfonts.com/c/d08bafd725a4cfc309efb5a88e0b63a5?family=basis33"
-      rel="stylesheet"
-    />
+    <script>
+      // Apply saved / navigator language before React mounts to avoid EN flash
+      ;(function () {
+        try {
+          var saved = localStorage.getItem('xyanua-lang')
+          var lang =
+            saved === 'vi' || saved === 'en' || saved === 'zh'
+              ? saved
+              : (navigator.language || 'en').toLowerCase().indexOf('vi') === 0
+                ? 'vi'
+                : (navigator.language || 'en').toLowerCase().indexOf('zh') === 0
+                  ? 'zh'
+                  : 'en'
+          document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang
+          document.documentElement.dataset.lang = lang
+        } catch (e) {}
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Play,
   Menu,
@@ -13,141 +13,18 @@ import {
 } from 'lucide-react'
 import MusicPlayer from './MusicPlayer'
 import CaseStudyModal from './CaseStudyModal'
+import Logo from './components/Logo'
+import CountUp from './components/CountUp'
+import Reveal from './components/Reveal'
+import LanguageSwitch from './components/LanguageSwitch'
+import PageLoader from './components/PageLoader'
+import HeroBackdrop from './components/HeroBackdrop'
+import HeroVideo from './components/HeroVideo'
 import { useLanguage } from './i18n/LanguageContext'
-import { LANGS } from './i18n/translations'
 import { caseUi, cases } from './i18n/cases'
 import { CONTACT, mailtoHref } from './contact'
 
 const SERVICE_ICONS = [Shield, Bot, Lock, Terminal, Radar, Cpu] as const
-
-function Logo() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="28"
-      height="28"
-      viewBox="0 0 256 256"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z"
-        fill="white"
-      />
-    </svg>
-  )
-}
-
-function CountUp({ value, className = '' }: { value: number; className?: string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const [n, setN] = useState(0)
-
-  useEffect(() => {
-    const node = ref.current
-    if (!node) return
-    let raf = 0
-    let started = false
-
-    const run = () => {
-      const start = performance.now()
-      const duration = 1100
-      const tick = (now: number) => {
-        const t = Math.min(1, (now - start) / duration)
-        const eased = 1 - Math.pow(1 - t, 3)
-        setN(Math.round(value * eased))
-        if (t < 1) raf = requestAnimationFrame(tick)
-      }
-      raf = requestAnimationFrame(tick)
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started) {
-          started = true
-          run()
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.4 },
-    )
-    observer.observe(node)
-    return () => {
-      observer.disconnect()
-      cancelAnimationFrame(raf)
-    }
-  }, [value])
-
-  return (
-    <span ref={ref} className={className}>
-      {n}
-    </span>
-  )
-}
-
-function Reveal({
-  children,
-  className = '',
-  delay = 0,
-}: {
-  children: ReactNode
-  className?: string
-  delay?: number
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const node = ref.current
-    if (!node) return
-    node.classList.remove('is-visible')
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          node.classList.add('is-visible')
-          observer.unobserve(node)
-        }
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
-    )
-
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <div
-      ref={ref}
-      className={`reveal ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  )
-}
-
-function LanguageSwitch() {
-  const { lang, setLang } = useLanguage()
-
-  return (
-    <div className="flex items-center gap-1 border border-white/15 bg-black/30 p-0.5 backdrop-blur-sm">
-      {LANGS.map((item) => (
-        <button
-          key={item.code}
-          type="button"
-          onClick={() => setLang(item.code)}
-          className={`lang-btn px-2 py-1 text-[10px] tracking-wider ${
-            lang === item.code
-              ? 'is-active bg-white/15 text-white'
-              : 'text-white/50 hover:text-white/80'
-          }`}
-          aria-pressed={lang === item.code}
-        >
-          {item.label}
-        </button>
-      ))}
-    </div>
-  )
-}
 
 export default function App() {
   const { t, lang } = useLanguage()
@@ -165,8 +42,7 @@ export default function App() {
   const [emailCopied, setEmailCopied] = useState(false)
 
   const activeProject = t.projects.find((p) => p.id === activeCaseId) ?? null
-  const activeCase =
-    cases[lang].find((c) => c.id === activeCaseId) ?? null
+  const activeCase = cases[lang].find((c) => c.id === activeCaseId) ?? null
   const uiCase = caseUi[lang]
 
   const copyEmail = async () => {
@@ -175,7 +51,6 @@ export default function App() {
       setEmailCopied(true)
       window.setTimeout(() => setEmailCopied(false), 1800)
     } catch {
-      // fallback: open mailto if clipboard blocked
       window.location.href = mailtoHref()
     }
   }
@@ -227,29 +102,58 @@ export default function App() {
   }, [loading, menuOpen, activeCaseId])
 
   useEffect(() => {
-    let frame = 0
+    let cancelled = false
     let raf = 0
-    const duration = 1800
-    const start = performance.now()
+    let exitTimer = 0
 
-    const tick = (now: number) => {
-      const ratio = Math.min(1, (now - start) / duration)
-      const eased = 1 - Math.pow(1 - ratio, 3)
-      setLoadProgress(Math.round(eased * 100))
-      if (ratio < 1) {
-        raf = requestAnimationFrame(tick)
-      } else {
-        frame = window.setTimeout(() => {
-          setLoaderExit(true)
-          window.setTimeout(() => setLoading(false), 500)
-        }, 180)
+    const finish = () => {
+      if (cancelled) return
+      setLoadProgress(100)
+      exitTimer = window.setTimeout(() => {
+        setLoaderExit(true)
+        window.setTimeout(() => {
+          if (!cancelled) setLoading(false)
+        }, 400)
+      }, 120)
+    }
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) {
+      finish()
+      return () => {
+        cancelled = true
+        window.clearTimeout(exitTimer)
       }
     }
 
+    const start = performance.now()
+    const minMs = 700
+    const maxMs = 1600
+
+    const tick = (now: number) => {
+      if (cancelled) return
+      const elapsed = now - start
+      const ratio = Math.min(1, elapsed / maxMs)
+      const eased = 1 - Math.pow(1 - ratio, 3)
+      setLoadProgress(Math.round(eased * 100))
+      if (ratio < 1) raf = requestAnimationFrame(tick)
+    }
     raf = requestAnimationFrame(tick)
+
+    const ready = Promise.race([
+      Promise.all([
+        document.fonts?.ready ?? Promise.resolve(),
+        new Promise<void>((r) => window.setTimeout(r, minMs)),
+      ]),
+      new Promise<void>((r) => window.setTimeout(r, maxMs)),
+    ])
+
+    void ready.then(finish)
+
     return () => {
+      cancelled = true
       cancelAnimationFrame(raf)
-      window.clearTimeout(frame)
+      window.clearTimeout(exitTimer)
     }
   }, [])
 
@@ -263,33 +167,7 @@ export default function App() {
         <span style={{ width: `${readProgress}%` }} />
       </div>
 
-      {loading && (
-        <div
-          className={`fixed inset-0 z-[100] flex items-center justify-center bg-black transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            loaderExit ? 'pointer-events-none opacity-0' : 'opacity-100'
-          }`}
-          aria-busy="true"
-          aria-live="polite"
-        >
-          <div className="flex w-[min(72vw,280px)] flex-col items-center">
-            <div
-              className="glitch font-pixel text-3xl tracking-[0.2em] text-white sm:text-4xl"
-              data-text="XYANUA"
-            >
-              XYANUA
-            </div>
-            <div className="mt-6 h-[2px] w-full overflow-hidden bg-white/15">
-              <div
-                className="h-full bg-white transition-[width] duration-100 ease-linear"
-                style={{ width: `${loadProgress}%` }}
-              />
-            </div>
-            <div className="mt-3 font-pixel text-[10px] tracking-widest text-white/40">
-              {loadProgress}%
-            </div>
-          </div>
-        </div>
-      )}
+      {loading && <PageLoader progress={loadProgress} exiting={loaderExit} />}
 
       <header
         className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
@@ -335,15 +213,9 @@ export default function App() {
         id="top"
         className="relative flex min-h-screen flex-col overflow-hidden px-5 pt-20 sm:px-6 md:px-10 lg:px-14"
       >
-        <video
-          src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover lg:scale-[1.2]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
+        <HeroBackdrop />
+        <HeroVideo enabled={!loading} />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
 
         <div className="relative z-10 flex flex-1 flex-col">
           <p className="mt-2 flex items-center text-xs tracking-[0.18em] text-white/70 uppercase sm:mt-4">

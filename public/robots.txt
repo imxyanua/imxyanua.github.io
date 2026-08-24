@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://imxyanua.github.io/sitemap.xml

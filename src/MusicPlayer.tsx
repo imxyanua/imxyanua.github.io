@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Music2, Pause, SkipForward } from 'lucide-react'
 import { useLanguage } from './i18n/LanguageContext'
 
-/** YouTube video IDs from user playlist links */
+/** YouTube video IDs from user playlist links — API loads only after first play */
 const TRACKS = [
   { id: 'gJAbDSse5WM', label: 'Hngle - Tìm em ft. Bảo Anh' },
   {
@@ -47,14 +47,19 @@ declare global {
 }
 
 function loadYouTubeApi(): Promise<void> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     if (window.YT?.Player) {
       resolve()
       return
     }
 
     const previous = window.onYouTubeIframeAPIReady
+    const timeout = window.setTimeout(() => {
+      reject(new Error('YouTube API timeout'))
+    }, 12000)
+
     window.onYouTubeIframeAPIReady = () => {
+      window.clearTimeout(timeout)
       previous?.()
       resolve()
     }
@@ -63,6 +68,11 @@ function loadYouTubeApi(): Promise<void> {
       const tag = document.createElement('script')
       tag.id = 'youtube-iframe-api'
       tag.src = 'https://www.youtube.com/iframe_api'
+      tag.async = true
+      tag.onerror = () => {
+        window.clearTimeout(timeout)
+        reject(new Error('YouTube API failed to load'))
+      }
       document.head.appendChild(tag)
     }
   })
@@ -74,23 +84,42 @@ export default function MusicPlayer() {
   const hostRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<YtPlayer | null>(null)
   const indexRef = useRef(0)
+  const playAfterReady = useRef(false)
+  const [booting, setBooting] = useState(false)
   const [ready, setReady] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [trackIndex, setTrackIndex] = useState(0)
   const [error, setError] = useState(false)
 
-  useEffect(() => {
-    let cancelled = false
+  const destroyPlayer = useCallback(() => {
+    try {
+      playerRef.current?.destroy()
+    } catch {
+      // ignore
+    }
+    playerRef.current = null
+  }, [])
 
-    const setup = async () => {
-      try {
-        await loadYouTubeApi()
-        if (cancelled || !hostRef.current || !window.YT) return
+  useEffect(() => () => destroyPlayer(), [destroyPlayer])
 
-        playerRef.current = new window.YT.Player(hostRef.current, {
+  const ensurePlayer = useCallback(async () => {
+    if (playerRef.current && ready) return playerRef.current
+    if (!hostRef.current) throw new Error('missing host')
+
+    setBooting(true)
+    setError(false)
+
+    try {
+      await loadYouTubeApi()
+      if (!hostRef.current || !window.YT) throw new Error('YT unavailable')
+
+      destroyPlayer()
+
+      await new Promise<void>((resolve, reject) => {
+        playerRef.current = new window.YT!.Player(hostRef.current!, {
           height: 1,
           width: 1,
-          videoId: TRACKS[0].id,
+          videoId: TRACKS[indexRef.current].id,
           playerVars: {
             autoplay: 0,
             controls: 0,
@@ -102,8 +131,15 @@ export default function MusicPlayer() {
             origin: window.location.origin,
           },
           events: {
-            onReady: () => {
-              if (!cancelled) setReady(true)
+            onReady: (e) => {
+              setReady(true)
+              setBooting(false)
+              if (playAfterReady.current) {
+                playAfterReady.current = false
+                e.target.playVideo()
+                setPlaying(true)
+              }
+              resolve()
             },
             onStateChange: (e) => {
               const YT = window.YT
@@ -119,32 +155,39 @@ export default function MusicPlayer() {
               }
             },
             onError: () => {
-              if (!cancelled) setError(true)
+              setError(true)
+              setBooting(false)
+              setPlaying(false)
+              reject(new Error('YT playback error'))
             },
           },
         })
-      } catch {
-        if (!cancelled) setError(true)
-      }
+      })
+    } catch {
+      setError(true)
+      setBooting(false)
+      setReady(false)
+      destroyPlayer()
+      throw new Error('init failed')
     }
 
-    void setup()
+    return playerRef.current
+  }, [destroyPlayer, ready])
 
-    return () => {
-      cancelled = true
-      try {
-        playerRef.current?.destroy()
-      } catch {
-        // ignore
-      }
-      playerRef.current = null
-    }
-  }, [])
-
-  const toggle = useCallback(() => {
-    const player = playerRef.current
-    if (!player || !ready) return
+  const toggle = useCallback(async () => {
     try {
+      if (error) {
+        setError(false)
+        setReady(false)
+        destroyPlayer()
+      }
+      if (!ready || !playerRef.current) {
+        playAfterReady.current = true
+        await ensurePlayer()
+        return
+      }
+
+      const player = playerRef.current
       const state = player.getPlayerState()
       if (state === 1) {
         player.pauseVideo()
@@ -156,18 +199,33 @@ export default function MusicPlayer() {
     } catch {
       setError(true)
     }
-  }, [ready])
+  }, [destroyPlayer, ensurePlayer, error, ready])
 
-  const nextTrack = useCallback(() => {
-    const player = playerRef.current
-    if (!player || !ready) return
-    const next = (indexRef.current + 1) % TRACKS.length
-    indexRef.current = next
-    setTrackIndex(next)
-    player.loadVideoById(TRACKS[next].id)
-    player.playVideo()
-    setPlaying(true)
-  }, [ready])
+  const nextTrack = useCallback(async () => {
+    try {
+      if (error) {
+        setError(false)
+        setReady(false)
+        destroyPlayer()
+      }
+      if (!ready || !playerRef.current) {
+        indexRef.current = (indexRef.current + 1) % TRACKS.length
+        setTrackIndex(indexRef.current)
+        playAfterReady.current = true
+        await ensurePlayer()
+        return
+      }
+
+      const next = (indexRef.current + 1) % TRACKS.length
+      indexRef.current = next
+      setTrackIndex(next)
+      playerRef.current.loadVideoById(TRACKS[next].id)
+      playerRef.current.playVideo()
+      setPlaying(true)
+    } catch {
+      setError(true)
+    }
+  }, [destroyPlayer, ensurePlayer, error, ready])
 
   const label = TRACKS[trackIndex].label
   const status = playing ? t.audioOn : t.audioOff
@@ -196,8 +254,8 @@ export default function MusicPlayer() {
         >
           <button
             type="button"
-            onClick={toggle}
-            disabled={!ready || error}
+            onClick={() => void toggle()}
+            disabled={booting}
             className="flex h-11 w-11 items-center justify-center transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
             aria-label={playing ? t.pauseMusic : t.playMusic}
             title={playing ? t.pauseMusic : t.playMusic}
@@ -207,8 +265,8 @@ export default function MusicPlayer() {
 
           <button
             type="button"
-            onClick={nextTrack}
-            disabled={!ready || error}
+            onClick={() => void nextTrack()}
+            disabled={booting}
             className="flex h-11 w-11 items-center justify-center transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
             aria-label={t.nextTrack}
             title={t.nextTrack}

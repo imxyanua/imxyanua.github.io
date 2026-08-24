@@ -366,27 +366,27 @@ export const translations: Record<Lang, Dictionary> = {
     capsTitle: 'Chỗ tôi hữu ích trong stack thật',
     services: [
       {
-        title: 'Identity / cloud pathfinding',
+        title: 'Pathfinding identity / cloud',
         desc: 'Lỗ federation, role chaining, policy storage — nhìn như attacker di chuyển, không phải ma trận compliance.',
       },
       {
-        title: 'AI agent abuse testing',
+        title: 'Kiểm thử lạm dụng AI agent',
         desc: 'Quyền tool, poisoning retrieval, và agent “hữu ích” tuồn dữ liệu qua workflow bình thường.',
       },
       {
-        title: 'Secure product surfaces',
+        title: 'Bảo vệ bề mặt sản phẩm',
         desc: 'Biên auth, secrets, pattern React/Next fail-closed khi bị abuse.',
       },
       {
-        title: 'Prompt-injection regression',
+        title: 'Regression prompt-injection',
         desc: 'Fixture + cổng CI để đổi prompt/model không âm thầm mở lại attack cũ.',
       },
       {
-        title: 'Detection engineering',
+        title: 'Kỹ thuật detection',
         desc: 'Rule và triage note thiên về tín hiệu. Ít alert hơn, hành động rõ hơn.',
       },
       {
-        title: 'Containment automation',
+        title: 'Tự động hóa containment',
         desc: 'Bước SOAR có cổng người — rút dwell time mà không để bot tự đập production.',
       },
     ],
@@ -547,27 +547,27 @@ export const translations: Record<Lang, Dictionary> = {
     capsTitle: '我在真实栈里有用的位置',
     services: [
       {
-        title: 'Identity / cloud pathfinding',
+        title: '身份 / 云路径推演',
         desc: '联邦缺口、角色串联、存储策略错误 — 按攻击者移动来画，不是合规矩阵。',
       },
       {
-        title: 'AI agent abuse testing',
+        title: 'AI Agent 滥用测试',
         desc: '工具权限、检索投毒，以及通过正常流程外泄的“热心” Agent。',
       },
       {
-        title: 'Secure product surfaces',
+        title: '产品面安全加固',
         desc: '认证边界、密钥处理，以及在滥用下失败即关闭的 React/Next 模式。',
       },
       {
-        title: 'Prompt-injection regression',
+        title: '提示注入回归',
         desc: 'Fixture + CI 闸门，避免提示/模型变更悄悄重开已知攻击。',
       },
       {
-        title: 'Detection engineering',
+        title: '检测工程',
         desc: '偏向信号的规则与分诊说明。更少告警，更清楚的下一步。',
       },
       {
-        title: 'Containment automation',
+        title: '遏制自动化',
         desc: '带人工闸门的 SOAR — 缩短驻留时间，又不让机器人独自砸生产。',
       },
     ],

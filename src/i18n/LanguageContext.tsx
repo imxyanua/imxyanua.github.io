@@ -27,18 +27,24 @@ function detectLang(): Lang {
     // ignore
   }
 
-  const nav = navigator.language.toLowerCase()
-  if (nav.startsWith('vi')) return 'vi'
-  if (nav.startsWith('zh')) return 'zh'
+  if (typeof navigator !== 'undefined') {
+    const nav = navigator.language.toLowerCase()
+    if (nav.startsWith('vi')) return 'vi'
+    if (nav.startsWith('zh')) return 'zh'
+  }
   return 'en'
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>('en')
+function applyDocumentLang(lang: Lang) {
+  const root = document.documentElement
+  root.lang = lang === 'zh' ? 'zh-CN' : lang
+  root.dataset.lang = lang
+  document.title = translations[lang].pageTitle
+}
 
-  useEffect(() => {
-    setLangState(detectLang())
-  }, [])
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  // Sync init avoids EN flash before localStorage / navigator resolve
+  const [lang, setLangState] = useState<Lang>(() => detectLang())
 
   const setLang = useCallback((next: Lang) => {
     setLangState(next)
@@ -50,10 +56,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    const root = document.documentElement
-    root.lang = lang === 'zh' ? 'zh-CN' : lang
-    root.dataset.lang = lang
-    document.title = translations[lang].pageTitle
+    applyDocumentLang(lang)
   }, [lang])
 
   const value = useMemo(

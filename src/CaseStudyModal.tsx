@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useId, useRef } from 'react'
 import { X } from 'lucide-react'
 import type { CaseDetail, CaseUi } from './i18n/cases'
 
@@ -13,6 +13,9 @@ type Props = {
   labelFont: string
 }
 
+const FOCUSABLE =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+
 export default function CaseStudyModal({
   open,
   onClose,
@@ -23,13 +26,52 @@ export default function CaseStudyModal({
   ui,
   labelFont,
 }: Props) {
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const previouslyFocused = useRef<HTMLElement | null>(null)
+  const titleId = useId()
+
   useEffect(() => {
     if (!open) return
+
+    previouslyFocused.current = document.activeElement as HTMLElement | null
+
+    const dialog = dialogRef.current
+    const focusables = () =>
+      dialog ? Array.from(dialog.querySelectorAll<HTMLElement>(FOCUSABLE)) : []
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        onClose()
+        return
+      }
+      if (e.key !== 'Tab') return
+
+      const nodes = focusables()
+      if (nodes.length === 0) return
+
+      const first = nodes[0]
+      const last = nodes[nodes.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
     }
+
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    // Move focus into dialog after paint
+    requestAnimationFrame(() => {
+      const nodes = focusables()
+      ;(nodes[0] ?? dialog)?.focus()
+    })
+
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      previouslyFocused.current?.focus?.()
+    }
   }, [open, onClose])
 
   return (
@@ -45,13 +87,16 @@ export default function CaseStudyModal({
           open ? 'opacity-100' : 'opacity-0'
         }`}
         aria-label={ui.close}
+        tabIndex={open ? 0 : -1}
         onClick={onClose}
       />
 
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label={title}
+        aria-labelledby={titleId}
+        tabIndex={-1}
         className={`relative z-10 flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden border border-white/15 bg-[#080808] shadow-[0_0_80px_rgba(59,130,246,0.12)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:max-h-[85vh] ${
           open ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}
@@ -59,7 +104,9 @@ export default function CaseStudyModal({
         <div className="flex items-start justify-between gap-4 border-b border-white/10 px-5 py-4 sm:px-8 sm:py-5">
           <div>
             <div className="font-pixel text-xs tracking-widest text-emerald-300/90">{tag}</div>
-            <h3 className="mt-2 text-2xl tracking-wide sm:text-3xl">{title}</h3>
+            <h3 id={titleId} className="mt-2 text-2xl tracking-wide sm:text-3xl">
+              {title}
+            </h3>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/60">{summary}</p>
           </div>
           <button
