@@ -1,4 +1,4 @@
-/** Local cinematic backdrop — no third-party video CDN */
+/** Local cinematic backdrop. No third-party video CDN. */
 export default function HeroBackdrop() {
   return (
     <div className="hero-backdrop" aria-hidden="true">

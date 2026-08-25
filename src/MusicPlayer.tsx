@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Music2, Pause, SkipForward } from 'lucide-react'
 import { useLanguage } from './i18n/LanguageContext'
 
-/** YouTube video IDs from user playlist links — API loads only after first play */
+/** YouTube video IDs from user playlist links. API loads only after first play. */
 const TRACKS = [
   { id: 'gJAbDSse5WM', label: 'Hngle - Tìm em ft. Bảo Anh' },
   {

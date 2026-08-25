@@ -49,7 +49,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     {
       id: 'pathfinder',
       problem:
-        'A fintech platform needed proof that identity and cloud gaps could chain into tenant takeover — before a real attacker did it.',
+        'A fintech platform needed proof that identity and cloud gaps could chain into tenant takeover, before a real attacker did it.',
       approach: [
         'Mapped trust boundaries across IdP, CI roles, and object storage.',
         'Emulated a low-privilege identity and chained misconfigs into privilege escalation.',
@@ -90,7 +90,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     {
       id: 'pathfinder',
       problem:
-        'Một nền tảng fintech cần bằng chứng rằng lỗ hổng identity + cloud có thể bị xâu chuỗi thành chiếm tenant — trước khi kẻ tấn công thật làm điều đó.',
+        'Một nền tảng fintech cần bằng chứng rằng lỗ hổng identity + cloud có thể bị xâu chuỗi thành chiếm tenant, trước khi kẻ tấn công thật làm điều đó.',
       approach: [
         'Lập bản đồ biên tin cậy qua IdP, CI roles và object storage.',
         'Mô phỏng identity đặc quyền thấp rồi xâu misconfig thành leo thang đặc quyền.',
@@ -131,7 +131,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     {
       id: 'pathfinder',
       problem:
-        '某金融科技平台需要证明身份与云配置缺口可被串联成租户接管 — 在真实攻击者之前完成。',
+        '某金融科技平台需要证明身份与云配置缺口可被串联成租户接管，在真实攻击者之前完成。',
       approach: [
         '梳理 IdP、CI 角色与对象存储之间的信任边界。',
         '模拟低权限身份，并将错误配置串联为提权路径。',

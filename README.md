@@ -1,4 +1,4 @@
-# xyanua — personal portfolio
+# xyanua / personal portfolio
 
 Cybersecurity & AI engineer portfolio for [imxyanua.github.io](https://imxyanua.github.io/).
 

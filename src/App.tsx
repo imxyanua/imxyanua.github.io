@@ -29,7 +29,7 @@ const SERVICE_ICONS = [Shield, Bot, Lock, Terminal, Radar, Cpu] as const
 
 export default function App() {
   const { t, lang } = useLanguage()
-  /** Pixel font lacks Vietnamese/Chinese glyphs — use readable label font instead */
+  /** Pixel font lacks Vietnamese/Chinese glyphs. Use a readable label font instead. */
   const labelFont = lang === 'en' ? 'font-pixel' : 'font-label'
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)

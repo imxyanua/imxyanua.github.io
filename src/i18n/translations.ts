@@ -97,7 +97,7 @@ export const translations: Record<Lang, Dictionary> = {
     roleLine2: 'AI ENGINEER',
     whatIDo: 'Focus',
     whatIDoBody:
-      'I chain identity, cloud, and LLM-tool abuse into proofs that force concrete fixes — then wire detections so the same path lights up next time.',
+      'I chain identity, cloud, and LLM-tool abuse into proofs that force concrete fixes, then wire detections so the same path lights up next time.',
     servicesLabel: 'Ops stack',
     serviceList: [
       'Identity / cloud attack paths',
@@ -131,17 +131,17 @@ export const translations: Record<Lang, Dictionary> = {
       'Agent eval gates',
       'Assume-breach drills',
     ],
-    aboutLabel: '01 — About',
+    aboutLabel: '01 / About',
     aboutTitle1: 'Assume breach.',
     aboutTitle2: 'Ship the proof.',
     aboutP1:
-      "I'm xyanua. I spend time in the ugly seams: federation trust, over-privileged CI roles, agent tools that can read tickets and send mail, and chat surfaces that treat retrieval as gospel.",
+      "I'm xyanua. I live in Vietnam. Most of my time goes into identity and cloud attack paths, and into AI agents that can be abused through their own tools.",
     aboutP2:
-      'If a path is exploitable, I show the chain with evidence. Then I help turn that chain into detections, guardrails, and code changes that survive the next creative attacker — not a slide deck.',
+      'If I find a path, I write the hops so it can be reproduced. Then I help close it and add a detection for the same steps.',
     statOps: 'Red team ops',
     statRules: 'Detection rules',
     statAgents: 'AI agents',
-    termTitle: 'xyanua — zsh',
+    termTitle: 'xyanua / zsh',
     termLines: [
       '$ whoami',
       'xyanua',
@@ -154,7 +154,7 @@ export const translations: Record<Lang, Dictionary> = {
       '',
       '$ _',
     ],
-    methodLabel: '02 — Method',
+    methodLabel: '02 / Method',
     methodTitle: 'How I actually work a target',
     methodSteps: [
       {
@@ -178,12 +178,12 @@ export const translations: Record<Lang, Dictionary> = {
         text: 'MTTD/MTTR, false-positive rate, agent eval fails. If it is not measured, it will rot.',
       },
     ],
-    capsLabel: '03 — Capabilities',
+    capsLabel: '03 / Capabilities',
     capsTitle: 'Where I am useful in a real stack',
     services: [
       {
         title: 'Identity / cloud pathfinding',
-        desc: 'Federation gaps, role chaining, storage policy mistakes — mapped as attacker movement, not a compliance matrix.',
+        desc: 'Federation gaps, role chaining, storage policy mistakes. Mapped as attacker movement, not a compliance matrix.',
       },
       {
         title: 'AI agent abuse testing',
@@ -203,10 +203,10 @@ export const translations: Record<Lang, Dictionary> = {
       },
       {
         title: 'Containment automation',
-        desc: 'SOAR steps with human gates — shorten dwell time without letting bots nuke production alone.',
+        desc: 'SOAR steps with human gates. Shorten dwell time without letting bots nuke production alone.',
       },
     ],
-    projectsLabel: '04 — Selected work',
+    projectsLabel: '04 / Selected work',
     projectsTitle: 'Proofs that changed the backlog',
     caseStudy: 'Open proof →',
     projects: [
@@ -229,13 +229,13 @@ export const translations: Record<Lang, Dictionary> = {
         text: 'Injection / jailbreak / tool-abuse fixtures wired into CI for a production chat surface.',
       },
     ],
-    labLabel: '05 — Lab',
+    labLabel: '05 / Lab',
     labTitle: 'Notes I keep open while I work',
     labBody:
-      'Prompt fixtures, cloud attack graphs, and detection drafts. Rough on purpose — this is an operator notebook, not a brochure.',
+      'Prompt fixtures, cloud attack graphs, and detection drafts. Rough on purpose. This is an operator notebook, not a brochure.',
     labTags: ['prompt fixtures', 'IAM graphs', 'sigma drafts'],
-    talkLabel: '06 — Talk',
-    talkTitle: 'Got a path you cannot prove — or an agent you do not fully trust?',
+    talkLabel: '06 / Talk',
+    talkTitle: 'Got a path you cannot prove, or an agent you do not fully trust?',
     talkBody:
       'Send the stack and the fear. I will tell you quickly whether it is a red-team proof, a detection problem, an agent-guardrail problem, or all three.',
     scheduleCta: 'EMAIL ME',
@@ -275,7 +275,7 @@ export const translations: Record<Lang, Dictionary> = {
     roleLine2: 'AI ENGINEER',
     whatIDo: 'Focus',
     whatIDoBody:
-      'Tôi xâu chuỗi identity, cloud và lạm dụng tool của LLM thành bằng chứng buộc phải vá — rồi gắn detection để lần sau cùng path đó sáng lên.',
+      'Tôi xâu chuỗi identity, cloud và lạm dụng tool của LLM thành bằng chứng buộc phải vá, rồi gắn detection để lần sau cùng path đó sáng lên.',
     servicesLabel: 'Ops stack',
     serviceList: [
       'Identity / cloud attack paths',
@@ -309,17 +309,17 @@ export const translations: Record<Lang, Dictionary> = {
       'Agent eval gates',
       'Assume-breach drills',
     ],
-    aboutLabel: '01 — Giới thiệu',
+    aboutLabel: '01 / Giới thiệu',
     aboutTitle1: 'Assume breach.',
     aboutTitle2: 'Ship the proof.',
     aboutP1:
-      'Tôi là xyanua. Tôi làm việc ở những mối nối xấu: trust federation, CI role thừa quyền, agent tool đọc ticket rồi gửi mail, và chat surface coi retrieval như chân lý.',
+      'Tôi là xyanua, đang ở Việt Nam. Tôi hay soi identity với cloud, và test agent AI xem tool của nó có bị lạm dụng được không.',
     aboutP2:
-      'Nếu path khai thác được, tôi đưa chuỗi bằng chứng. Rồi biến chuỗi đó thành detection, guardrail và thay đổi code sống sót trước attacker kế tiếp — không phải slide.',
+      'Có path thì tôi ghi từng bước cho tái lập được. Xong vá, rồi gắn detection cho đúng chuỗi đó.',
     statOps: 'Chiến dịch red team',
     statRules: 'Detection rules',
     statAgents: 'AI agents',
-    termTitle: 'xyanua — zsh',
+    termTitle: 'xyanua / zsh',
     termLines: [
       '$ whoami',
       'xyanua',
@@ -332,7 +332,7 @@ export const translations: Record<Lang, Dictionary> = {
       '',
       '$ _',
     ],
-    methodLabel: '02 — Phương pháp',
+    methodLabel: '02 / Phương pháp',
     methodTitle: 'Cách tôi thực sự làm một target',
     methodSteps: [
       {
@@ -356,12 +356,12 @@ export const translations: Record<Lang, Dictionary> = {
         text: 'MTTD/MTTR, false-positive, agent eval fail. Không đo thì sẽ mục.',
       },
     ],
-    capsLabel: '03 — Năng lực',
+    capsLabel: '03 / Năng lực',
     capsTitle: 'Chỗ tôi hữu ích trong stack thật',
     services: [
       {
         title: 'Pathfinding identity / cloud',
-        desc: 'Lỗ federation, role chaining, policy storage — nhìn như attacker di chuyển, không phải ma trận compliance.',
+        desc: 'Lỗ federation, role chaining, policy storage. Nhìn như attacker di chuyển, không phải ma trận compliance.',
       },
       {
         title: 'Kiểm thử lạm dụng AI agent',
@@ -381,10 +381,10 @@ export const translations: Record<Lang, Dictionary> = {
       },
       {
         title: 'Tự động hóa containment',
-        desc: 'Bước SOAR có cổng người — rút dwell time mà không để bot tự đập production.',
+        desc: 'Bước SOAR có cổng người. Rút dwell time mà không để bot tự đập production.',
       },
     ],
-    projectsLabel: '04 — Công việc chọn lọc',
+    projectsLabel: '04 / Công việc chọn lọc',
     projectsTitle: 'Bằng chứng làm đổi backlog',
     caseStudy: 'Mở proof →',
     projects: [
@@ -407,13 +407,13 @@ export const translations: Record<Lang, Dictionary> = {
         text: 'Fixture injection / jailbreak / tool-abuse gắn CI cho chat production.',
       },
     ],
-    labLabel: '05 — Lab',
+    labLabel: '05 / Lab',
     labTitle: 'Ghi chú tôi để mở khi làm việc',
     labBody:
-      'Fixture prompt, đồ thị tấn công cloud, detection nháp. Cố ý thô — đây là sổ operator, không phải brochure.',
+      'Fixture prompt, đồ thị tấn công cloud, detection nháp. Cố ý thô. Đây là sổ operator, không phải brochure.',
     labTags: ['prompt fixtures', 'IAM graphs', 'sigma drafts'],
-    talkLabel: '06 — Liên hệ',
-    talkTitle: 'Có path chưa chứng minh được — hoặc agent anh chưa tin hết?',
+    talkLabel: '06 / Liên hệ',
+    talkTitle: 'Có path chưa chứng minh được, hoặc agent anh chưa tin hết?',
     talkBody:
       'Gửi stack và nỗi sợ. Tôi nói nhanh đó là bài red-team, bài detection, bài guardrail agent, hay cả ba.',
     scheduleCta: 'GỬI EMAIL',
@@ -445,7 +445,7 @@ export const translations: Record<Lang, Dictionary> = {
     closeMenu: '关闭菜单',
     brandBlurb: [
       'xyanua 是我的',
-      '行动代号 — 围绕',
+      '行动代号，围绕',
       '拆解系统而构建',
       '"为了让它们更安全"',
     ],
@@ -487,17 +487,17 @@ export const translations: Record<Lang, Dictionary> = {
       'Agent eval gates',
       'Assume-breach drills',
     ],
-    aboutLabel: '01 — 关于',
+    aboutLabel: '01 / 关于',
     aboutTitle1: 'Assume breach.',
     aboutTitle2: 'Ship the proof.',
     aboutP1:
-      '我是 xyanua。我盯着难看的接缝：联邦信任、过权的 CI 角色、能读工单并发信的 Agent 工具，以及把检索当真理的聊天界面。',
+      '我是 xyanua，在越南。我主要看身份和云上的路径，也测带工具的 AI Agent 会不会被顺着正常流程滥用。',
     aboutP2:
-      '路径若可利用，我就给出证据链。再把它变成检测、护栏与能扛住下一次攻击的代码改动 — 不是幻灯片。',
+      '找到路径我就按步骤写下来，方便复现。然后修，再给同一串动作补检测。',
     statOps: '红队行动',
     statRules: '检测规则',
     statAgents: 'AI Agents',
-    termTitle: 'xyanua — zsh',
+    termTitle: 'xyanua / zsh',
     termLines: [
       '$ whoami',
       'xyanua',
@@ -510,7 +510,7 @@ export const translations: Record<Lang, Dictionary> = {
       '',
       '$ _',
     ],
-    methodLabel: '02 — 方法',
+    methodLabel: '02 / 方法',
     methodTitle: '我对目标的真实做法',
     methodSteps: [
       {
@@ -534,12 +534,12 @@ export const translations: Record<Lang, Dictionary> = {
         text: 'MTTD/MTTR、误报、Agent 评估失败。不度量就会腐烂。',
       },
     ],
-    capsLabel: '03 — 能力',
+    capsLabel: '03 / 能力',
     capsTitle: '我在真实栈里有用的位置',
     services: [
       {
         title: '身份 / 云路径推演',
-        desc: '联邦缺口、角色串联、存储策略错误 — 按攻击者移动来画，不是合规矩阵。',
+        desc: '联邦缺口、角色串联、存储策略错误。按攻击者移动来画，不是合规矩阵。',
       },
       {
         title: 'AI Agent 滥用测试',
@@ -559,10 +559,10 @@ export const translations: Record<Lang, Dictionary> = {
       },
       {
         title: '遏制自动化',
-        desc: '带人工闸门的 SOAR — 缩短驻留时间，又不让机器人独自砸生产。',
+        desc: '带人工闸门的 SOAR。缩短驻留时间，又不让机器人独自砸生产。',
       },
     ],
-    projectsLabel: '04 — 精选作品',
+    projectsLabel: '04 / 精选作品',
     projectsTitle: '改写了 backlog 的证据',
     caseStudy: '打开证明 →',
     projects: [
@@ -585,12 +585,12 @@ export const translations: Record<Lang, Dictionary> = {
         text: '注入/越狱/工具滥用 fixture 接入生产聊天的 CI。',
       },
     ],
-    labLabel: '05 — 实验室',
+    labLabel: '05 / 实验室',
     labTitle: '我工作时常开的笔记',
-    labBody: '提示 fixture、云攻击图、检测草稿。故意粗糙 — 这是操作员笔记本，不是宣传册。',
+    labBody: '提示 fixture、云攻击图、检测草稿。故意粗糙。这是操作员笔记本，不是宣传册。',
     labTags: ['prompt fixtures', 'IAM graphs', 'sigma drafts'],
-    talkLabel: '06 — 联系',
-    talkTitle: '有条路径你证不出来 — 或一个你不敢全信的 Agent？',
+    talkLabel: '06 / 联系',
+    talkTitle: '有条路径你证不出来，或一个你不敢全信的 Agent？',
     talkBody: '把栈和担忧发来。我会很快判断这是红队证明、检测问题、Agent 护栏，还是三者都有。',
     scheduleCta: '发送邮件',
     contactEmail: '邮箱',

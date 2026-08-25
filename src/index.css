@@ -34,7 +34,7 @@ section[id] {
   scroll-margin-top: 5.5rem;
 }
 
-/* Terminal/pixel font — ASCII branding only (no Vietnamese/Chinese glyphs) */
+/* Terminal/pixel font: ASCII branding only (no Vietnamese/Chinese glyphs) */
 .font-pixel {
   font-family: 'VT323', 'Courier New', ui-monospace, monospace;
   font-weight: 400;
@@ -352,7 +352,7 @@ html[data-lang='zh'] .font-label {
   outline-offset: 3px;
 }
 
-/* Custom CRT cursor — desktop fine pointer only */
+/* Custom CRT cursor: desktop fine pointer only */
 .pointer-fx {
   display: none;
 }

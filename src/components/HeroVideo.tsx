@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-/** Same Pexels clip, lighter encodes — UHD was ~45MB and felt slow */
+/** Same Pexels clip, lighter encodes. UHD was ~45MB and felt slow. */
 const SRC_720 = 'https://videos.pexels.com/video-files/3129957/3129957-hd_1280_720_25fps.mp4'
 const SRC_1080 = 'https://videos.pexels.com/video-files/3129957/3129957-hd_1920_1080_25fps.mp4'
 
