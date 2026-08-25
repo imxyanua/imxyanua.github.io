@@ -1,20 +1,8 @@
 import { useEffect, useState } from 'react'
-import {
-  Play,
-  Menu,
-  X,
-  Shield,
-  Bot,
-  Radar,
-  Lock,
-  Terminal,
-  Cpu,
-  ArrowUp,
-} from 'lucide-react'
+import { Menu, X, ArrowUp } from 'lucide-react'
 import MusicPlayer from './MusicPlayer'
 import CaseStudyModal from './CaseStudyModal'
 import Logo from './components/Logo'
-import CountUp from './components/CountUp'
 import Reveal from './components/Reveal'
 import LanguageSwitch from './components/LanguageSwitch'
 import PageLoader from './components/PageLoader'
@@ -25,11 +13,8 @@ import { useLanguage } from './i18n/LanguageContext'
 import { caseUi, cases } from './i18n/cases'
 import { CONTACT, mailtoHref } from './contact'
 
-const SERVICE_ICONS = [Shield, Bot, Lock, Terminal, Radar, Cpu] as const
-
 export default function App() {
   const { t, lang } = useLanguage()
-  /** Pixel font lacks Vietnamese/Chinese glyphs. Use a readable label font instead. */
   const labelFont = lang === 'en' ? 'font-pixel' : 'font-label'
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -47,15 +32,13 @@ export default function App() {
 
   const navLinks = [
     { label: t.nav.about, href: '#about', id: 'about' },
-    { label: t.nav.method, href: '#method', id: 'method' },
-    { label: t.nav.projects, href: '#projects', id: 'projects' },
-    { label: t.nav.research, href: '#research', id: 'research' },
-    { label: t.nav.lab, href: '#lab', id: 'lab' },
+    { label: t.nav.craft, href: '#craft', id: 'craft' },
+    { label: t.nav.work, href: '#projects', id: 'projects' },
     { label: t.nav.talk, href: '#talk', id: 'talk' },
   ]
 
   useEffect(() => {
-    const sectionIds = ['top', 'about', 'method', 'research', 'projects', 'lab', 'talk']
+    const sectionIds = ['top', 'about', 'craft', 'projects', 'talk']
 
     const onScroll = () => {
       const y = window.scrollY
@@ -166,12 +149,14 @@ export default function App() {
             : 'bg-transparent'
         }`}
       >
-        <nav className="mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-5 py-5 sm:px-6 md:px-10 lg:px-14">
-          <a href="#top" className="transition-opacity hover:opacity-70" aria-label="Home">
+        <nav className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-5 sm:px-6 md:px-10 lg:px-14">
+          <a href="#top" className="header-brand transition-opacity hover:opacity-70" aria-label="Home">
             <Logo />
+            <span className="header-brand__name">xyanua</span>
+            <span className={`${labelFont} header-brand__alias`}>/ operator</span>
           </a>
 
-          <div className="hidden items-center gap-6 lg:flex xl:gap-8">
+          <div className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -199,163 +184,69 @@ export default function App() {
         </nav>
       </header>
 
-      <section
-        id="top"
-        className="relative flex min-h-screen flex-col overflow-hidden px-5 pt-20 sm:px-6 md:px-10 lg:px-14"
-      >
+      <section id="top" className="hero-shell">
         <HeroBackdrop />
         <HeroVideo enabled={!loading} />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
+        <div className="hero-scrim" />
 
-        <div className="relative z-10 flex flex-1 flex-col">
-          <p className="mt-2 flex items-center text-xs tracking-[0.18em] text-white/70 uppercase sm:mt-4">
+        <div className="hero-content">
+          <p className="hero-eyebrow">
             <span className="hero-tick" aria-hidden="true" />
-            <span>
-              {t.roleLine1.replace('&', '').trim()} <span className="text-white/35">×</span>{' '}
-              {t.roleLine2}
-            </span>
+            <span>{t.heroRole1}</span>
+            <span className="hero-eyebrow__x">×</span>
+            <span>{t.heroRole2}</span>
           </p>
 
-          <div className="mt-4 grid grid-cols-2 gap-3 sm:mt-6 sm:gap-6 lg:grid-cols-4 lg:gap-8">
-            <div>
-              <h2 className="text-base leading-tight tracking-wide sm:text-lg md:text-xl">
-                <span
-                  className="glitch font-pixel text-xl sm:text-2xl md:text-3xl"
-                  data-text="XYANUA"
-                >
-                  XYANUA
-                </span>
-              </h2>
-              <div className="mt-2 text-[10px] text-white/50 sm:mt-3">*</div>
-              <p
-                className={`${labelFont} mt-1 hidden text-xs leading-relaxed text-white/60 sm:block`}
-              >
-                {t.brandBlurb[0]}
-                <br />
-                {t.brandBlurb[1]}
-                <br />
-                {t.brandBlurb[2]}
-                <br />
-                {t.brandBlurb[3]}
-              </p>
-            </div>
+          <h1 className="hero-title">
+            <span className="hero-title__line">
+              <span className="glitch" data-text="xyanua">
+                xyanua
+              </span>
+            </span>
+          </h1>
+          <p className={`${labelFont} hero-alias`}>
+            <span className="hero-alias__br">[</span> cybersecurity / ai{' '}
+            <span className="hero-alias__br">]</span>
+          </p>
+          <p className="hero-lede">{t.heroLede}</p>
 
-            <div className="text-right lg:text-left">
-              <h2 className="text-base leading-tight tracking-wide sm:text-lg md:text-xl">
-                <span className="font-normal">{t.roleLine1}</span>
-                <br />
-                <span className="font-pixel text-xl sm:text-2xl md:text-3xl">{t.roleLine2}</span>
-              </h2>
-            </div>
-
-            <div className="hidden lg:block">
-              <div
-                className={`${labelFont} mb-3 text-base tracking-widest text-white/50 uppercase`}
-              >
-                {t.whatIDo}
-              </div>
-              <p className="max-w-[220px] text-sm leading-relaxed text-white/90">{t.whatIDoBody}</p>
-            </div>
-
-            <div className="hidden text-right lg:block lg:text-left">
-              <div
-                className={`${labelFont} mb-3 text-base tracking-widest text-white/50 uppercase`}
-              >
-                {t.servicesLabel}
-              </div>
-              <ul className="space-y-0.5 text-sm leading-relaxed text-white/90">
-                {t.serviceList.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="flex-1" />
-
-          <div className="pb-8">
-            <div className="grid grid-cols-1 items-end gap-4 sm:gap-6 lg:grid-cols-2">
-              <h1
-                className="text-[1.7rem] font-normal tracking-wide uppercase sm:text-4xl md:text-5xl lg:text-[3.75rem] xl:text-[4.25rem]"
-                style={{ lineHeight: 0.78 }}
-              >
-                {t.hero.line1}
-                <br />
-                <span
-                  className="glitch font-pixel inline-block align-baseline text-[1.25em] leading-none font-normal"
-                  data-text={t.hero.pixel1}
-                >
-                  {t.hero.pixel1}
-                </span>{' '}
-                {t.hero.mid}
-                <br />
-                {t.hero.line3}
-                <br />
-                <span
-                  className="glitch font-pixel inline-block align-baseline text-[1.25em] leading-none font-normal"
-                  data-text={t.hero.pixel2}
-                >
-                  {t.hero.pixel2}
-                </span>
-              </h1>
-
-              <div className="flex flex-col justify-end gap-4 sm:gap-6">
-                <div className="flex flex-wrap items-center gap-3 self-start">
-                  <a
-                    href="#about"
-                    className="flex items-center gap-3 border border-white/30 bg-white/5 px-6 py-3 backdrop-blur-sm transition-colors hover:bg-white/10"
-                  >
-                    <Play size={14} fill="white" />
-                    <span className="text-sm tracking-wider">{t.enterBriefing}</span>
-                  </a>
-                  <a href="#about" className="btn-ghost">
-                    {t.aboutCta}
-                  </a>
-                </div>
-
-                <div className="flex max-w-full flex-wrap items-stretch gap-2 self-start text-sm text-white/80 sm:gap-3 lg:self-end">
-                  <div className="flex items-center gap-2 bg-[#0B0B0B] px-2.5 py-1.5 sm:px-4 sm:py-2">
-                    <span className="text-sm font-bold tracking-tight sm:text-base">OSCP</span>
-                    <span className="text-xs text-white/50">x1</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-[#0B0B0B] px-2.5 py-1.5 sm:px-4 sm:py-2">
-                    <span className="text-base font-bold sm:text-xl">HTB</span>
-                    <span className="text-xs text-white/50">x47</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-[#0B0B0B] px-2.5 py-1.5 sm:px-4 sm:py-2">
-                    <span className="text-[10px] font-bold tracking-tight sm:text-xs">
-                      AI RedTeam
-                    </span>
-                    <span className="text-xs text-white/50">x12</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 flex items-end justify-between gap-4 border-t border-white/10 pt-4">
-              <div className="space-y-2">
-                <p className="text-xs text-white/60">
-                  {t.openToWork}{' '}
-                  <a
-                    href={mailtoHref()}
-                    className="text-red-500 transition-colors hover:text-red-400"
-                  >
-                    {t.scheduleCall}
-                  </a>
-                </p>
-                <p className="text-[11px] tracking-wide text-white/40">
-                  <span className="text-white/30">{t.basedIn}</span> {t.basedInVal}
-                </p>
-              </div>
-              <a href="#about" className="scroll-hint hidden sm:flex">
-                <span>{t.scroll}</span>
-                <span className="scroll-hint-line" aria-hidden="true">
-                  <i />
-                </span>
-              </a>
-            </div>
+          <div className="hero-actions">
+            <a href="#projects" className="btn-pill btn-pill--primary">
+              <span>{t.heroCtaWork}</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path
+                  d="M5 12h13M13 6l6 6-6 6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+            <a href="#about" className="btn-pill btn-pill--ghost">
+              {t.heroCtaAbout}
+            </a>
           </div>
         </div>
+
+        <div className="hero-meta">
+          <div className="hero-metacol">
+            <span className={`${labelFont} k`}>{t.basedIn}</span>
+            <span className="v">{t.basedInVal}</span>
+          </div>
+          <div className="hero-metacol">
+            <span className={`${labelFont} k`}>{t.focusK}</span>
+            <span className="v">{t.focusV}</span>
+          </div>
+        </div>
+
+        <a href="#about" className="hero-scroll hidden sm:flex" aria-label={t.scroll}>
+          <span>{t.scroll}</span>
+          <span className="scroll-hint-line" aria-hidden="true">
+            <i />
+          </span>
+        </a>
       </section>
 
       <div className="skills-marquee" aria-hidden="true">
@@ -369,205 +260,167 @@ export default function App() {
         </div>
       </div>
 
-      <section
-        id="about"
-        className="relative border-t border-white/10 bg-black px-5 py-24 sm:px-6 md:px-10 lg:px-14"
-      >
-        <div className="pointer-events-none absolute inset-0 grid-noise opacity-40" />
-        <div className="relative mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-          <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
-              {t.aboutLabel}
-            </p>
-            <h2 className="mt-4 text-3xl leading-tight tracking-wide md:text-5xl">
-              {t.aboutTitle1}
-              <br />
-              <span className={`${labelFont} text-emerald-300`}>{t.aboutTitle2}</span>
-            </h2>
-          </Reveal>
-
-          <div className="space-y-6 text-base leading-relaxed text-white/75 md:text-lg">
-            <Reveal delay={80}>
-              <p>
-                {t.aboutP1.split('xyanua').map((part, i, arr) =>
-                  i < arr.length - 1 ? (
-                    <span key={i}>
-                      {part}
-                      <span className="text-white">xyanua</span>
-                    </span>
-                  ) : (
-                    <span key={i}>{part}</span>
-                  ),
-                )}
-              </p>
-            </Reveal>
-            <Reveal delay={160}>
-              <p>{t.aboutP2}</p>
-            </Reveal>
-            <Reveal delay={240}>
-              <div className="grid grid-cols-3 gap-4 border border-white/10 bg-white/[0.02] p-5">
-                <div>
-                  <div className="font-pixel text-2xl text-white md:text-3xl">
-                    <CountUp value={3} />
-                  </div>
-                  <div className="mt-1 text-xs tracking-wide text-white/50 uppercase">
-                    {t.statOps}
-                  </div>
+      <section id="about" className="site-section">
+        <div className="site-wrap about-grid">
+          <div className="about-left">
+            <Reveal>
+              <p className={`${labelFont} secnum`}>{t.aboutLabel}</p>
+              <figure className="about-figure">
+                <div className="about-figure__stage">
+                  <HeroBackdrop />
                 </div>
-                <div>
-                  <div className="font-pixel text-2xl text-white md:text-3xl">
-                    <CountUp value={47} />
-                  </div>
-                  <div className="mt-1 text-xs tracking-wide text-white/50 uppercase">
-                    {t.statRules}
-                  </div>
-                </div>
-                <div>
-                  <div className="font-pixel text-2xl text-white md:text-3xl">
-                    <CountUp value={12} />
-                  </div>
-                  <div className="mt-1 text-xs tracking-wide text-white/50 uppercase">
-                    {t.statAgents}
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={300}>
-              <div className="term-card mt-6">
-                <div className="term-bar">
-                  <i />
-                  <i />
-                  <i />
-                  <span>{t.termTitle}</span>
-                </div>
-                <pre className="term-body">
-                  {t.termLines.map((line, idx) => {
-                    if (line.startsWith('$')) {
-                      return (
-                        <div key={`term-${idx}`}>
-                          <span className="c">$</span>
-                          <span className={line.includes('_') ? 'dim' : undefined}>
-                            {line.slice(1)}
-                          </span>
-                        </div>
-                      )
-                    }
-                    if (line.startsWith('▸')) {
-                      return (
-                        <div key={`term-${idx}`}>
-                          <span className="g">▸</span>
-                          {line.slice(1)}
-                        </div>
-                      )
-                    }
-                    if (line === '') return <div key={`term-${idx}`}>&nbsp;</div>
-                    return <div key={`term-${idx}`}>{line}</div>
-                  })}
-                </pre>
-              </div>
+                <figcaption className={labelFont}>{t.aboutCaption}</figcaption>
+              </figure>
             </Reveal>
           </div>
-        </div>
-      </section>
 
-      <section
-        id="method"
-        className="relative border-t border-white/10 bg-[#050505] px-5 py-24 sm:px-6 md:px-10 lg:px-14"
-      >
-        <div className="relative mx-auto max-w-[1200px]">
-          <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
-              {t.methodLabel}
-            </p>
-            <h2 className="mt-4 max-w-2xl text-3xl leading-tight tracking-wide md:text-5xl">
-              {t.methodTitle}
-            </h2>
-          </Reveal>
-
-          <div className="mt-14 grid gap-4 md:grid-cols-2">
-            {t.methodSteps.map((item, i) => (
-              <Reveal key={item.step} delay={i * 90}>
-                <article className="glow-card h-full border border-white/10 bg-black/40 p-6 md:p-8">
-                  <div className="font-pixel text-sm text-emerald-300/80">{item.step}</div>
-                  <h3 className="mt-3 text-xl tracking-wide">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/65">{item.text}</p>
-                </article>
+          <div>
+            <Reveal>
+              <h2 className="display-h2">
+                {t.aboutTitle1}
+                <br />
+                <em>{t.aboutTitleEm}</em>
+                <br />
+                {t.aboutTitle2}
+              </h2>
+            </Reveal>
+            <div className="about-body">
+              <Reveal delay={80}>
+                <p>
+                  {t.aboutP1.split('xyanua').map((part, i, arr) =>
+                    i < arr.length - 1 ? (
+                      <span key={i}>
+                        {part}
+                        <strong>xyanua</strong>
+                      </span>
+                    ) : (
+                      <span key={i}>{part}</span>
+                    ),
+                  )}
+                </p>
               </Reveal>
-            ))}
+              <Reveal delay={160}>
+                <p>{t.aboutP2}</p>
+              </Reveal>
+              <Reveal delay={220}>
+                <p>{t.aboutP3}</p>
+              </Reveal>
+            </div>
+            <Reveal delay={280}>
+              <ul className="about-stats">
+                {t.stats.map((item) => (
+                  <li key={item.l}>
+                    <span className="about-stats__n">{item.n}</span>
+                    <span className={`${labelFont} about-stats__l`}>{item.l}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      <section
-        id="research"
-        className="relative overflow-hidden border-t border-white/10 bg-black px-5 py-24 sm:px-6 md:px-10 lg:px-14"
-      >
-        <div className="scanline-overlay pointer-events-none absolute inset-0 opacity-30" />
-        <div className="relative mx-auto max-w-[1200px]">
+      <section id="craft" className="site-section craft-section">
+        <div className="site-wrap">
           <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
-              {t.capsLabel}
-            </p>
-            <h2 className="mt-4 max-w-3xl text-3xl leading-tight tracking-wide md:text-5xl">
-              {t.capsTitle}
-            </h2>
+            <p className={`${labelFont} secnum`}>{t.craftLabel}</p>
+            <h2 className="display-h2 craft-h">{t.craftTitle}</h2>
           </Reveal>
 
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {t.services.map((service, i) => {
-              const Icon = SERVICE_ICONS[i]
-              return (
-                <Reveal key={service.title} delay={i * 70}>
-                  <article className="glow-card h-full border border-white/10 bg-white/[0.02] p-6">
-                    <Icon className="text-emerald-300" size={22} />
-                    <h3 className="mt-5 text-lg tracking-wide">{service.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-white/60">{service.desc}</p>
-                  </article>
-                </Reveal>
-              )
-            })}
+          <div className="craft-grid">
+            <Reveal>
+              <article className="craft-card">
+                <div className="craft-card__head">
+                  <span className={`${labelFont} craft-card__tag`}>{t.craftJobTag}</span>
+                  <h3 className="display-h3">{t.craftJobTitle}</h3>
+                </div>
+                <div className="term-card">
+                  <div className="term-bar">
+                    <i />
+                    <i />
+                    <i />
+                    <span>{t.termTitle}</span>
+                  </div>
+                  <pre className="term-body">
+                    {t.termLines.map((line, idx) => {
+                      if (line.startsWith('$')) {
+                        return (
+                          <div key={`term-${idx}`}>
+                            <span className="c">$</span>
+                            <span className={line.includes('_') ? 'dim' : undefined}>
+                              {line.slice(1)}
+                            </span>
+                          </div>
+                        )
+                      }
+                      if (line.startsWith('▸')) {
+                        return (
+                          <div key={`term-${idx}`}>
+                            <span className="g">▸</span>
+                            {line.slice(1)}
+                          </div>
+                        )
+                      }
+                      if (line === '') return <div key={`term-${idx}`}>&nbsp;</div>
+                      return <div key={`term-${idx}`}>{line}</div>
+                    })}
+                  </pre>
+                </div>
+                <p className="craft-card__note">{t.craftJobNote}</p>
+              </article>
+            </Reveal>
+
+            <Reveal delay={90}>
+              <article className="craft-card">
+                <div className="craft-card__head">
+                  <span className={`${labelFont} craft-card__tag`}>{t.craftAiTag}</span>
+                  <h3 className="display-h3">{t.craftAiTitle}</h3>
+                </div>
+                <ul className="craft-lines">
+                  {t.craftAiLines.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+                <p className="craft-card__note">{t.craftAiNote}</p>
+              </article>
+            </Reveal>
+
+            <Reveal delay={140}>
+              <article className="craft-card craft-card--wide">
+                <div className="craft-card__head">
+                  <span className={`${labelFont} craft-card__tag`}>{t.craftHowTag}</span>
+                  <h3 className="display-h3">{t.craftHowTitle}</h3>
+                </div>
+                <p className="craft-card__wide-body">{t.craftHowNote}</p>
+              </article>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      <section
-        id="projects"
-        className="relative border-t border-white/10 bg-[#050505] px-5 py-24 sm:px-6 md:px-10 lg:px-14"
-      >
-        <div className="relative mx-auto max-w-[1200px]">
+      <section id="projects" className="site-section">
+        <div className="site-wrap">
           <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
-              {t.projectsLabel}
-            </p>
-            <h2 className="mt-4 text-3xl leading-tight tracking-wide md:text-5xl">
-              {t.projectsTitle}
-            </h2>
+            <p className={`${labelFont} secnum`}>{t.workLabel}</p>
+            <h2 className="display-h2">{t.workTitle}</h2>
+            <p className="work-intro">{t.workIntro}</p>
           </Reveal>
 
-          <div className="mt-14 space-y-4">
+          <div className="work-list">
             {t.projects.map((project, i) => (
-              <Reveal key={project.id} delay={i * 100}>
+              <Reveal key={project.id} delay={i * 80}>
                 <button
                   type="button"
                   onClick={() => setActiveCaseId(project.id)}
                   aria-label={`${uiCase.open}: ${project.title}`}
-                  className="glow-card group grid w-full gap-4 border border-white/10 bg-black/50 p-6 text-left md:grid-cols-[160px_1fr_auto] md:items-center md:p-8"
+                  className="work-row group"
                 >
-                  <span className="font-pixel text-xs tracking-widest text-emerald-300/90">
-                    {project.tag}
+                  <span className={`${labelFont} work-row__tag`}>{project.tag}</span>
+                  <span className="work-row__body">
+                    <span className="display-h3 work-row__title">{project.title}</span>
+                    <span className="work-row__text">{project.text}</span>
                   </span>
-                  <div>
-                    <h3 className="text-xl tracking-wide transition-colors group-hover:text-emerald-200 md:text-2xl">
-                      {project.title}
-                    </h3>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/60">
-                      {project.text}
-                    </p>
-                  </div>
-                  <span className="text-xs tracking-widest text-white/40 uppercase transition-colors group-hover:text-white/70">
-                    {t.caseStudy}
-                  </span>
+                  <span className={`${labelFont} work-row__cta`}>{t.caseStudy}</span>
                 </button>
               </Reveal>
             ))}
@@ -575,120 +428,70 @@ export default function App() {
         </div>
       </section>
 
-      <section
-        id="lab"
-        className="relative border-t border-white/10 bg-black px-5 py-24 sm:px-6 md:px-10 lg:px-14"
-      >
-        <div className="relative mx-auto max-w-[1200px]">
+      <section id="talk" className="site-section talk-section">
+        <div className="site-wrap">
           <Reveal>
-            <div className="border border-white/10 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent p-8 md:p-12">
-              <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
-                {t.labLabel}
-              </p>
-              <h2 className="mt-4 max-w-3xl text-3xl leading-tight tracking-wide md:text-5xl">
-                {t.labTitle}
-              </h2>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65">{t.labBody}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                {t.labTags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="border border-white/15 px-3 py-1.5 text-xs tracking-wide text-white/70"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section
-        id="talk"
-        className="relative border-t border-white/10 bg-[#050505] px-5 py-24 sm:px-6 md:px-10 lg:px-14"
-      >
-        <div className="relative mx-auto max-w-[1200px]">
-          <Reveal>
-            <p className={`${labelFont} text-sm tracking-widest text-emerald-400/80 uppercase`}>
-              {t.talkLabel}
-            </p>
-            <h2 className="mt-4 max-w-3xl text-3xl leading-tight tracking-wide md:text-5xl">
+            <p className={`${labelFont} secnum`}>{t.talkLabel}</p>
+            <h2 className="contact-h">
               {t.talkTitle}
+              <br />
+              <em>{t.talkTitleEm}</em>
             </h2>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65">{t.talkBody}</p>
-
-            <div className="mt-10 max-w-3xl">
-              <p className={`${labelFont} mb-2 text-xs tracking-widest text-white/45 uppercase`}>
-                {t.contactChannels}
-              </p>
-
-              <a href={mailtoHref()} className="social-row group">
-                <span className="social-row__n">01</span>
-                <span className="social-row__name">{t.contactEmail}</span>
-                <span className="social-row__handle">{CONTACT.email}</span>
-                <svg
-                  className="social-row__arw"
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M7 17L17 7M9 7h8v8"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
-
-              <a
-                href={CONTACT.github}
-                target="_blank"
-                rel="noreferrer"
-                className="social-row group"
-              >
-                <span className="social-row__n">02</span>
-                <span className="social-row__name">{t.contactGithub}</span>
-                <span className="social-row__handle">github.com/imxyanua</span>
-                <svg
-                  className="social-row__arw"
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M7 17L17 7M9 7h8v8"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
-            </div>
-
-            <div className="mt-10">
-              <a
-                href="#top"
-                className="inline-flex border border-white/25 px-6 py-3 text-sm tracking-wider text-white/80 transition-colors hover:bg-white/5 hover:text-white"
-              >
-                {t.backTop}
-              </a>
-            </div>
+            <p className="talk-body">{t.talkBody}</p>
           </Reveal>
+
+          <div className="mt-10 max-w-4xl">
+            <a href={mailtoHref()} className="social-row group">
+              <span className="social-row__n">01</span>
+              <span className="social-row__name">{t.contactEmail}</span>
+              <span className="social-row__handle">{CONTACT.email}</span>
+              <svg
+                className="social-row__arw"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                aria-hidden="true"
+              >
+                <path
+                  d="M7 17L17 7M9 7h8v8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+
+            <a href={CONTACT.github} target="_blank" rel="noreferrer" className="social-row group">
+              <span className="social-row__n">02</span>
+              <span className="social-row__name">{t.contactGithub}</span>
+              <span className="social-row__handle">github.com/imxyanua</span>
+              <svg
+                className="social-row__arw"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                aria-hidden="true"
+              >
+                <path
+                  d="M7 17L17 7M9 7h8v8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
 
       <footer className="border-t border-white/10 px-5 py-8 text-xs text-white/45 sm:px-6 md:px-10 lg:px-14">
-        <div className="mx-auto flex max-w-[1200px] flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <span className="font-pixel">XYANUA</span>
-          <span>{t.footerStats}</span>
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <span className="font-pixel">xyanua</span>
+          <span>{t.footerNote}</span>
         </div>
       </footer>
 
@@ -723,9 +526,7 @@ export default function App() {
 
       <div
         className={`fixed inset-0 z-50 flex flex-col bg-black/95 backdrop-blur-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          menuOpen
-            ? 'pointer-events-auto opacity-100'
-            : 'pointer-events-none opacity-0'
+          menuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
         <div className="flex items-center justify-between px-6 py-6">
@@ -756,6 +557,9 @@ export default function App() {
                 transitionDelay: menuOpen ? `${100 + i * 60}ms` : '0ms',
               }}
             >
+              <em className={`${labelFont} mr-3 text-sm not-italic text-emerald-300/80`}>
+                {String(i + 1).padStart(2, '0')}
+              </em>
               {link.label}
             </a>
           ))}

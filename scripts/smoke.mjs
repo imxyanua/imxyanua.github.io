@@ -77,7 +77,7 @@ try {
   if (!switched) {
     // Fallback: VI about title may not always include diacritics — check nav/text change
     const aboutText = await page.locator('#about').innerText()
-    if (!/về|operator|năng lực|công việc|xyanua/i.test(aboutText)) {
+    if (!/về|tôi là|việt|công việc|xyanua/i.test(aboutText)) {
       throw new Error('Language switch did not update page copy in place')
     }
   }

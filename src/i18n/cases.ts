@@ -57,7 +57,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
       ],
       outcome:
         'Delivered a full takeover narrative with prioritized fixes. Critical paths were closed within one sprint; detection coverage was added for the same chain.',
-      stack: ['AWS', 'OIDC', 'Terraform', 'BloodHound-style graphing', 'Custom exploit notes'],
+      stack: ['AWS', 'OIDC', 'Terraform', 'Identity graphing', 'Repro notes'],
     },
     {
       id: 'soc-copilot',
@@ -98,7 +98,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
       ],
       outcome:
         'Giao được câu chuyện takeover đầy đủ kèm fix ưu tiên. Các path critical được đóng trong một sprint; detection cho cùng chuỗi được bổ sung.',
-      stack: ['AWS', 'OIDC', 'Terraform', 'BloodHound-style graphing', 'Custom exploit notes'],
+      stack: ['AWS', 'OIDC', 'Terraform', 'Identity graphing', 'Repro notes'],
     },
     {
       id: 'soc-copilot',
@@ -139,7 +139,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
       ],
       outcome:
         '交付完整接管叙事与优先级修复。关键路径在一个 sprint 内关闭，并为同一链路补充检测。',
-      stack: ['AWS', 'OIDC', 'Terraform', 'BloodHound-style graphing', 'Custom exploit notes'],
+      stack: ['AWS', 'OIDC', 'Terraform', 'Identity graphing', 'Repro notes'],
     },
     {
       id: 'soc-copilot',
