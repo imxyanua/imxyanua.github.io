@@ -352,6 +352,63 @@ html[data-lang='zh'] .font-label {
   outline-offset: 3px;
 }
 
+/* Custom CRT cursor — desktop fine pointer only */
+.pointer-fx {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pointer-fx {
+    display: block;
+  }
+
+  html.has-pointer-fx,
+  html.has-pointer-fx * {
+    cursor: none !important;
+  }
+
+  .pointer-fx__ring,
+  .pointer-fx__dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .pointer-fx__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: #4ade80;
+    box-shadow:
+      0 0 10px rgba(74, 222, 128, 0.95),
+      0 0 22px rgba(34, 197, 94, 0.55);
+    transition: opacity 0.25s ease;
+  }
+
+  .pointer-fx__ring {
+    width: 34px;
+    height: 34px;
+    border-radius: 9999px;
+    border: 1px solid rgba(74, 222, 128, 0.65);
+    box-shadow: 0 0 18px rgba(74, 222, 128, 0.2);
+    transition:
+      opacity 0.25s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  html.pointer-hovering .pointer-fx__ring {
+    border-color: rgba(190, 242, 100, 0.95);
+    box-shadow:
+      0 0 0 1px rgba(74, 222, 128, 0.2),
+      0 0 28px rgba(74, 222, 128, 0.35);
+  }
+}
+
 /* Local hero atmosphere (replaces third-party video CDN) */
 .hero-backdrop {
   position: absolute;
@@ -789,5 +846,14 @@ html[data-lang='zh'] .font-label {
 
   .glow-card:hover {
     transform: none;
+  }
+
+  .pointer-fx {
+    display: none !important;
+  }
+
+  html.has-pointer-fx,
+  html.has-pointer-fx * {
+    cursor: auto !important;
   }
 }

@@ -48,6 +48,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLang = useCallback((next: Lang) => {
     setLangState(next)
+    // Apply document lang sync so fonts/title switch with the click
+    applyDocumentLang(next)
     try {
       localStorage.setItem(STORAGE_KEY, next)
     } catch {

@@ -64,12 +64,23 @@ try {
     { timeout: 8000 },
   )
 
-  // Language switch EN -> VI
+  // Language switch should update instantly (no remount / reload)
   const viBtn = page.getByRole('button', { name: 'VI', exact: true }).first()
   await viBtn.click()
   await page.waitForFunction(() => document.documentElement.dataset.lang === 'vi', {
-    timeout: 5000,
+    timeout: 2000,
   })
+  const switched = await page.evaluate(() => {
+    const title = document.querySelector('#about h2')
+    return Boolean(title && /[\u00C0-\u1EF9]/.test(title.textContent || ''))
+  })
+  if (!switched) {
+    // Fallback: VI about title may not always include diacritics — check nav/text change
+    const aboutText = await page.locator('#about').innerText()
+    if (!/về|operator|năng lực|công việc|xyanua/i.test(aboutText)) {
+      throw new Error('Language switch did not update page copy in place')
+    }
+  }
 
   // Open first case study, then close with Escape
   const caseBtn = page.locator('#projects button').first()

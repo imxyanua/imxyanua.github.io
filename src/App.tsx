@@ -20,6 +20,7 @@ import LanguageSwitch from './components/LanguageSwitch'
 import PageLoader from './components/PageLoader'
 import HeroBackdrop from './components/HeroBackdrop'
 import HeroVideo from './components/HeroVideo'
+import PointerFX from './components/PointerFX'
 import { useLanguage } from './i18n/LanguageContext'
 import { caseUi, cases } from './i18n/cases'
 import { CONTACT, mailtoHref } from './contact'
@@ -39,21 +40,10 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('top')
   const [showTop, setShowTop] = useState(false)
   const [activeCaseId, setActiveCaseId] = useState<string | null>(null)
-  const [emailCopied, setEmailCopied] = useState(false)
 
   const activeProject = t.projects.find((p) => p.id === activeCaseId) ?? null
   const activeCase = cases[lang].find((c) => c.id === activeCaseId) ?? null
   const uiCase = caseUi[lang]
-
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(CONTACT.email)
-      setEmailCopied(true)
-      window.setTimeout(() => setEmailCopied(false), 1800)
-    } catch {
-      window.location.href = mailtoHref()
-    }
-  }
 
   const navLinks = [
     { label: t.nav.about, href: '#about', id: 'about' },
@@ -158,7 +148,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="page-enter relative min-h-screen w-full bg-black text-white" key={lang}>
+    <div className="page-enter relative min-h-screen w-full bg-black text-white">
       <div className="film-grain" aria-hidden="true" />
       <div className="vignette" aria-hidden="true" />
       <div className="crt-flicker" aria-hidden="true" />
@@ -681,28 +671,6 @@ export default function App() {
                   />
                 </svg>
               </a>
-
-              <button type="button" onClick={() => void copyEmail()} className="social-row w-full text-left">
-                <span className="social-row__n">03</span>
-                <span className="social-row__name">{emailCopied ? t.contactCopied : t.contactCopy}</span>
-                <span className="social-row__handle">{CONTACT.email}</span>
-                <svg
-                  className="social-row__arw"
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M8 8h10v10M8 8l10 10"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
             </div>
 
             <div className="mt-10">
@@ -725,6 +693,7 @@ export default function App() {
       </footer>
 
       {!loading && <MusicPlayer />}
+      {!loading && <PointerFX />}
 
       {activeProject && activeCase && (
         <CaseStudyModal

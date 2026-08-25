@@ -62,10 +62,7 @@ export type Dictionary = {
   scheduleCta: string
   contactEmail: string
   contactGithub: string
-  contactCopy: string
-  contactCopied: string
   contactChannels: string
-  contactOpenProfile: string
   backTop: string
   footerStats: string
   audio: string
@@ -244,10 +241,7 @@ export const translations: Record<Lang, Dictionary> = {
     scheduleCta: 'EMAIL ME',
     contactEmail: 'Email',
     contactGithub: 'GitHub',
-    contactCopy: 'Copy email',
-    contactCopied: 'Copied',
     contactChannels: 'Direct channels',
-    contactOpenProfile: 'Open profile →',
     backTop: 'BACK TO TOP',
     footerStats: '3 red team ops • 47 detection rules • 12 AI agents',
     audio: 'AUDIO',
@@ -425,10 +419,7 @@ export const translations: Record<Lang, Dictionary> = {
     scheduleCta: 'GỬI EMAIL',
     contactEmail: 'Email',
     contactGithub: 'GitHub',
-    contactCopy: 'Sao chép email',
-    contactCopied: 'Đã sao chép',
     contactChannels: 'Kênh liên hệ',
-    contactOpenProfile: 'Mở hồ sơ →',
     backTop: 'VỀ ĐẦU TRANG',
     footerStats: '3 chiến dịch red team • 47 detection rules • 12 AI agents',
     audio: 'AUDIO',
@@ -604,10 +595,7 @@ export const translations: Record<Lang, Dictionary> = {
     scheduleCta: '发送邮件',
     contactEmail: '邮箱',
     contactGithub: 'GitHub',
-    contactCopy: '复制邮箱',
-    contactCopied: '已复制',
     contactChannels: '联系渠道',
-    contactOpenProfile: '打开主页 →',
     backTop: '回到顶部',
     footerStats: '3 次红队行动 • 47 条检测规则 • 12 个 AI Agent',
     audio: '音频',
