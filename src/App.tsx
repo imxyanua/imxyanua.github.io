@@ -249,17 +249,6 @@ export default function App() {
         </a>
       </section>
 
-      <div className="skills-marquee" aria-hidden="true">
-        <div className="skills-marquee-track">
-          {[...t.marqueeItems, ...t.marqueeItems].map((item, i) => (
-            <span key={`${item}-${i}`} className="skills-marquee-item">
-              {item}
-              <span className="dot">✦</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
       <section id="about" className="site-section">
         <div className="site-wrap about-grid">
           <div className="about-left">
@@ -306,13 +295,6 @@ export default function App() {
                 <p>{t.aboutP3}</p>
               </Reveal>
             </div>
-            <Reveal delay={280}>
-              <ul className="tool-row">
-                {t.tools.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </Reveal>
           </div>
         </div>
       </section>

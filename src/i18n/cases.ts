@@ -47,6 +47,19 @@ export const caseUi: Record<Lang, CaseUi> = {
 export const cases: Record<Lang, CaseDetail[]> = {
   en: [
     {
+      id: 'evolver',
+      problem:
+        'Agent sessions start from zero. Useful traces die in one chat and never become a reusable step.',
+      approach: [
+        'Distill verified work into genes and capsules on the EvoMap network.',
+        'Express recipes so a later agent can replay the same path.',
+        'Keep the loop in Evolver rather than a private notebook.',
+      ],
+      outcome:
+        'A self-evolution layer for agents, shipped as Evolver inside EvoMap.',
+      stack: ['TypeScript', 'GEP', 'Recipes', 'Genes', 'Capsules'],
+    },
+    {
       id: 'pathfinder',
       problem:
         'A fintech platform needed proof that identity and cloud gaps could chain into tenant takeover, before a real attacker did it.',
@@ -88,6 +101,18 @@ export const cases: Record<Lang, CaseDetail[]> = {
   ],
   vi: [
     {
+      id: 'evolver',
+      problem:
+        'Session agent bắt đầu từ zero. Trace hữu ích chết trong một chat, không thành bước tái sử dụng.',
+      approach: [
+        'Chưng công việc đã kiểm thành gene và capsule trên mạng EvoMap.',
+        'Express recipe để agent sau replay cùng path.',
+        'Giữ vòng lặp trong Evolver, không để trong sổ riêng.',
+      ],
+      outcome: 'Lớp tự tiến hóa cho agent, ship như Evolver trong EvoMap.',
+      stack: ['TypeScript', 'GEP', 'Recipes', 'Genes', 'Capsules'],
+    },
+    {
       id: 'pathfinder',
       problem:
         'Một nền tảng fintech cần bằng chứng rằng lỗ hổng identity + cloud có thể bị xâu chuỗi thành chiếm tenant, trước khi kẻ tấn công thật làm điều đó.',
@@ -128,6 +153,17 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
   ],
   zh: [
+    {
+      id: 'evolver',
+      problem: 'Agent 会话从零开始。有用的痕迹停在一次对话里，无法变成可复用步骤。',
+      approach: [
+        '把已验证的工作蒸馏为 EvoMap 网络上的 gene 与 capsule。',
+        '表达 recipe，让后续 Agent 能重放同一条路径。',
+        '把循环留在 Evolver，而不是私人笔记。',
+      ],
+      outcome: '一层 Agent 自进化，作为 Evolver 交付在 EvoMap 内。',
+      stack: ['TypeScript', 'GEP', 'Recipes', 'Genes', 'Capsules'],
+    },
     {
       id: 'pathfinder',
       problem:

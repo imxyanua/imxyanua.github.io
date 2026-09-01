@@ -20,7 +20,6 @@ export type Dictionary = {
   basedInVal: string
   focusK: string
   focusV: string
-  marqueeItems: string[]
   aboutLabel: string
   aboutCaption: string
   aboutTitle1: string
@@ -29,7 +28,6 @@ export type Dictionary = {
   aboutP1: string
   aboutP2: string
   aboutP3: string
-  tools: string[]
   craftLabel: string
   craftTitle: string
   craftJobTag: string
@@ -80,15 +78,6 @@ export const translations: Record<Lang, Dictionary> = {
     basedInVal: 'Vietnam',
     focusK: 'Focus',
     focusV: 'Identity, cloud, agents',
-    marqueeItems: [
-      'OIDC abuse paths',
-      'IAM privilege chains',
-      'Prompt injection',
-      'Tool-calling exfil',
-      'Sigma / SIEM rules',
-      'SOAR containment',
-      'Agent eval gates',
-    ],
     aboutLabel: '01 / About',
     aboutCaption: 'Identity, cloud, agents.',
     aboutTitle1: 'Cyber and AI.',
@@ -100,7 +89,6 @@ export const translations: Record<Lang, Dictionary> = {
       'A path gets written as hops so it can be reproduced. Then the hole is closed, and a detection is added for the same steps.',
     aboutP3:
       'Focus is identity, cloud, and agent tool-abuse. Not generic web pentest, not compliance slide decks.',
-    tools: ['AWS', 'OIDC', 'Terraform', 'Python', 'SIEM', 'TypeScript', 'Sigma', 'CI gates'],
     craftLabel: '02 / Craft',
     craftTitle: 'The work',
     craftJobTag: 'day job',
@@ -136,6 +124,12 @@ export const translations: Record<Lang, Dictionary> = {
     workIntro: 'A few paths that can be described. Open one for the short version.',
     caseStudy: 'Open →',
     projects: [
+      {
+        id: 'evolver',
+        tag: 'AI AGENT',
+        title: 'Evolver at EvoMap',
+        text: 'Agent self-evolution on the EvoMap network: recipes, genes, and capsules later agents can reuse.',
+      },
       {
         id: 'pathfinder',
         tag: 'IDENTITY',
@@ -189,15 +183,6 @@ export const translations: Record<Lang, Dictionary> = {
     basedInVal: 'Việt Nam',
     focusK: 'Focus',
     focusV: 'Identity, cloud, agents',
-    marqueeItems: [
-      'OIDC abuse paths',
-      'IAM privilege chains',
-      'Prompt injection',
-      'Tool-calling exfil',
-      'Sigma / SIEM rules',
-      'SOAR containment',
-      'Agent eval gates',
-    ],
     aboutLabel: '01 / Giới thiệu',
     aboutCaption: 'Identity, cloud, agents.',
     aboutTitle1: 'Cyber và AI.',
@@ -209,7 +194,6 @@ export const translations: Record<Lang, Dictionary> = {
       'Có path thì ghi từng bước cho tái lập được. Xong vá, rồi gắn detection cho đúng chuỗi đó.',
     aboutP3:
       'Trọng tâm là identity, cloud, và lạm dụng tool của agent. Không pentest web generic, không slide compliance.',
-    tools: ['AWS', 'OIDC', 'Terraform', 'Python', 'SIEM', 'TypeScript', 'Sigma', 'CI gates'],
     craftLabel: '02 / Công việc',
     craftTitle: 'Việc đang làm',
     craftJobTag: 'ngày thường',
@@ -245,6 +229,12 @@ export const translations: Record<Lang, Dictionary> = {
     workIntro: 'Vài path có thể kể. Mở một cái để đọc bản ngắn.',
     caseStudy: 'Mở →',
     projects: [
+      {
+        id: 'evolver',
+        tag: 'AI AGENT',
+        title: 'Evolver tại EvoMap',
+        text: 'Tự tiến hóa agent trên mạng EvoMap: recipe, gene và capsule để agent sau dùng lại.',
+      },
       {
         id: 'pathfinder',
         tag: 'IDENTITY',
@@ -297,15 +287,6 @@ export const translations: Record<Lang, Dictionary> = {
     basedInVal: '越南',
     focusK: 'Focus',
     focusV: '身份、云、Agent',
-    marqueeItems: [
-      'OIDC abuse paths',
-      'IAM privilege chains',
-      'Prompt injection',
-      'Tool-calling exfil',
-      'Sigma / SIEM rules',
-      'SOAR containment',
-      'Agent eval gates',
-    ],
     aboutLabel: '01 / 关于',
     aboutCaption: '身份、云、Agent。',
     aboutTitle1: '安全与 AI。',
@@ -315,7 +296,6 @@ export const translations: Record<Lang, Dictionary> = {
       'xyanua，在越南。主业是身份与云上的路径，以及带工具的 AI Agent 会不会被顺着正常流程滥用。',
     aboutP2: '找到路径就按步骤写下来，方便复现。然后修，再给同一串动作补检测。',
     aboutP3: '重心是身份、云、Agent 工具滥用。不做泛泛的 Web 渗透，也不做合规幻灯片。',
-    tools: ['AWS', 'OIDC', 'Terraform', 'Python', 'SIEM', 'TypeScript', 'Sigma', 'CI gates'],
     craftLabel: '02 / 工作',
     craftTitle: '在做的事',
     craftJobTag: '日常',
@@ -349,6 +329,12 @@ export const translations: Record<Lang, Dictionary> = {
     workIntro: '几条可以讲的路径。点开看短版。',
     caseStudy: '打开 →',
     projects: [
+      {
+        id: 'evolver',
+        tag: 'AI AGENT',
+        title: 'EvoMap 上的 Evolver',
+        text: 'EvoMap 网络上的 Agent 自进化：recipe、gene、capsule，供后续 Agent 复用。',
+      },
       {
         id: 'pathfinder',
         tag: 'IDENTITY',
