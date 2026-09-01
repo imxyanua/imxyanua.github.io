@@ -325,7 +325,7 @@ export default function App() {
           </Reveal>
 
           <div className="craft-grid">
-            <Reveal>
+            <Reveal className="craft-cell">
               <article className="craft-card">
                 <div className="craft-card__head">
                   <span className={`${labelFont} craft-card__tag`}>{t.craftJobTag}</span>
@@ -367,7 +367,7 @@ export default function App() {
               </article>
             </Reveal>
 
-            <Reveal delay={90}>
+            <Reveal className="craft-cell" delay={90}>
               <article className="craft-card">
                 <div className="craft-card__head">
                   <span className={`${labelFont} craft-card__tag`}>{t.craftAiTag}</span>

@@ -24,12 +24,9 @@ export default function Reveal({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          node.classList.add('is-visible')
-          observer.unobserve(node)
-        }
+        node.classList.toggle('is-visible', entry.isIntersecting)
       },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
+      { threshold: 0.12, rootMargin: '-8% 0px -8% 0px' },
     )
 
     observer.observe(node)
