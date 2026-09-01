@@ -1,11 +1,20 @@
 import type { Lang } from './translations'
 
+export type CaseVenue = 'live' | 'client' | 'lab'
+
+export type CaseLink = {
+  href: string
+  kind: 'repo' | 'site'
+}
+
 export type CaseDetail = {
   id: string
+  venue: CaseVenue
   problem: string
   approach: string[]
   outcome: string
   stack: string[]
+  links?: CaseLink[]
 }
 
 export type CaseUi = {
@@ -14,7 +23,14 @@ export type CaseUi = {
   approach: string
   outcome: string
   stack: string
+  links: string
   open: string
+  note: string
+  live: string
+  client: string
+  lab: string
+  repo: string
+  site: string
 }
 
 export const caseUi: Record<Lang, CaseUi> = {
@@ -24,7 +40,14 @@ export const caseUi: Record<Lang, CaseUi> = {
     approach: 'Approach',
     outcome: 'Outcome',
     stack: 'Stack',
-    open: 'Open case study',
+    links: 'Links',
+    open: 'Open note',
+    note: 'Note',
+    live: 'Public',
+    client: 'Client',
+    lab: 'Lab',
+    repo: 'GitHub',
+    site: 'EvoMap',
   },
   vi: {
     close: 'Đóng',
@@ -32,7 +55,14 @@ export const caseUi: Record<Lang, CaseUi> = {
     approach: 'Cách làm',
     outcome: 'Kết quả',
     stack: 'Công nghệ',
-    open: 'Mở case study',
+    links: 'Liên kết',
+    open: 'Mở ghi chú',
+    note: 'Ghi chú',
+    live: 'Public',
+    client: 'Khách',
+    lab: 'Lab',
+    repo: 'GitHub',
+    site: 'EvoMap',
   },
   zh: {
     close: '关闭',
@@ -40,7 +70,14 @@ export const caseUi: Record<Lang, CaseUi> = {
     approach: '方法',
     outcome: '结果',
     stack: '技术栈',
-    open: '打开案例',
+    links: '链接',
+    open: '打开笔记',
+    note: '笔记',
+    live: '公开',
+    client: '客户',
+    lab: '实验室',
+    repo: 'GitHub',
+    site: 'EvoMap',
   },
 }
 
@@ -48,6 +85,11 @@ export const cases: Record<Lang, CaseDetail[]> = {
   en: [
     {
       id: 'evolver',
+      venue: 'live',
+      links: [
+        { kind: 'repo', href: 'https://github.com/EvoMap/evolver' },
+        { kind: 'site', href: 'https://evomap.ai' },
+      ],
       problem:
         'Agent sessions start from zero. Useful traces die in one chat and never become a reusable step.',
       approach: [
@@ -61,6 +103,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
     {
       id: 'pathfinder',
+      venue: 'client',
       problem:
         'A fintech platform needed proof that identity and cloud gaps could chain into tenant takeover, before a real attacker did it.',
       approach: [
@@ -74,6 +117,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
     {
       id: 'soc-copilot',
+      venue: 'client',
       problem:
         'SOC analysts drowned in medium-fidelity alerts. Triage time was high and context switching killed focus.',
       approach: [
@@ -87,6 +131,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
     {
       id: 'prompt-armor',
+      venue: 'lab',
       problem:
         'A production chat surface exposed tools and retrieval. Prompt injection and data-exfil paths were untested.',
       approach: [
@@ -102,6 +147,11 @@ export const cases: Record<Lang, CaseDetail[]> = {
   vi: [
     {
       id: 'evolver',
+      venue: 'live',
+      links: [
+        { kind: 'repo', href: 'https://github.com/EvoMap/evolver' },
+        { kind: 'site', href: 'https://evomap.ai' },
+      ],
       problem:
         'Session agent bắt đầu từ zero. Trace hữu ích chết trong một chat, không thành bước tái sử dụng.',
       approach: [
@@ -114,6 +164,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
     {
       id: 'pathfinder',
+      venue: 'client',
       problem:
         'Một nền tảng fintech cần bằng chứng rằng lỗ hổng identity + cloud có thể bị xâu chuỗi thành chiếm tenant, trước khi kẻ tấn công thật làm điều đó.',
       approach: [
@@ -127,6 +178,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
     {
       id: 'soc-copilot',
+      venue: 'client',
       problem:
         'Analyst SOC ngập trong alert độ tin cậy trung bình. Thời gian triage cao và chuyển ngữ cảnh liên tục làm mất tập trung.',
       approach: [
@@ -140,6 +192,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
     {
       id: 'prompt-armor',
+      venue: 'lab',
       problem:
         'Bề mặt chat production mở tool và retrieval. Prompt injection cùng đường data-exfil chưa được kiểm thử.',
       approach: [
@@ -155,6 +208,11 @@ export const cases: Record<Lang, CaseDetail[]> = {
   zh: [
     {
       id: 'evolver',
+      venue: 'live',
+      links: [
+        { kind: 'repo', href: 'https://github.com/EvoMap/evolver' },
+        { kind: 'site', href: 'https://evomap.ai' },
+      ],
       problem: 'Agent 会话从零开始。有用的痕迹停在一次对话里，无法变成可复用步骤。',
       approach: [
         '把已验证的工作蒸馏为 EvoMap 网络上的 gene 与 capsule。',
@@ -166,6 +224,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
     {
       id: 'pathfinder',
+      venue: 'client',
       problem:
         '某金融科技平台需要证明身份与云配置缺口可被串联成租户接管，在真实攻击者之前完成。',
       approach: [
@@ -179,6 +238,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
     {
       id: 'soc-copilot',
+      venue: 'client',
       problem: 'SOC 分析师被中等置信告警淹没，分诊耗时长，频繁切换上下文损害专注。',
       approach: [
         '构建 Agent，将告警、资产与近期认证上下文汇总为一份简报。',
@@ -191,6 +251,7 @@ export const cases: Record<Lang, CaseDetail[]> = {
     },
     {
       id: 'prompt-armor',
+      venue: 'lab',
       problem: '生产聊天界面暴露工具与检索能力，提示注入与数据外泄路径未经测试。',
       approach: [
         '建立注入、越狱与工具滥用的回归语料。',

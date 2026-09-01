@@ -167,6 +167,27 @@ export default function CaseStudyModal({
               ))}
             </div>
           </section>
+
+          {detail.links && detail.links.length > 0 && (
+            <section>
+              <h4 className={`${labelFont} text-xs tracking-widest text-emerald-400/80 uppercase`}>
+                {ui.links}
+              </h4>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {detail.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="work-link"
+                  >
+                    {link.kind === 'repo' ? ui.repo : ui.site}
+                  </a>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </div>

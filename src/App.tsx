@@ -376,23 +376,47 @@ export default function App() {
           </Reveal>
 
           <div className="work-list">
-            {t.projects.map((project, i) => (
-              <Reveal key={project.id} delay={i * 80}>
-                <button
-                  type="button"
-                  onClick={() => setActiveCaseId(project.id)}
-                  aria-label={`${uiCase.open}: ${project.title}`}
-                  className="work-row group"
-                >
-                  <span className={`${labelFont} work-row__tag`}>{project.tag}</span>
-                  <span className="work-row__body">
-                    <span className="display-h3 work-row__title">{project.title}</span>
-                    <span className="work-row__text">{project.text}</span>
-                  </span>
-                  <span className={`${labelFont} work-row__cta`}>{t.caseStudy}</span>
-                </button>
-              </Reveal>
-            ))}
+            {t.projects.map((project, i) => {
+              const detail = cases[lang].find((c) => c.id === project.id)
+              const venue = detail?.venue ?? 'lab'
+              return (
+                <Reveal key={project.id} className="work-cell" delay={i * 80}>
+                  <article
+                    className={`work-row${venue === 'live' ? ' work-row--live' : ''}`}
+                  >
+                    <div className={`${labelFont} work-row__meta`}>
+                      <span className="work-row__tag">{project.tag}</span>
+                      <span className="work-row__venue">{uiCase[venue]}</span>
+                    </div>
+                    <h3 className="display-h3 work-row__title">{project.title}</h3>
+                    <p className="work-row__text">{project.text}</p>
+                    <div className="work-row__actions">
+                      <div className="work-row__ext">
+                        {detail?.links?.map((link) => (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="work-link"
+                          >
+                            {link.kind === 'repo' ? uiCase.repo : uiCase.site}
+                          </a>
+                        ))}
+                      </div>
+                      <button
+                        type="button"
+                        className="work-link work-link--note"
+                        onClick={() => setActiveCaseId(project.id)}
+                        aria-label={`${uiCase.open}: ${project.title}`}
+                      >
+                        {uiCase.note}
+                      </button>
+                    </div>
+                  </article>
+                </Reveal>
+              )
+            })}
           </div>
         </div>
       </section>
