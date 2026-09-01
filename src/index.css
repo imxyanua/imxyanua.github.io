@@ -1,7 +1,23 @@
 @import "tailwindcss";
 
+:root {
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: 'Instrument Serif', 'Times New Roman', serif;
+}
+
+html[data-lang='vi'] {
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: 'Noto Serif', 'Instrument Serif', 'Times New Roman', serif;
+}
+
+html[data-lang='zh'] {
+  --font-body: 'Noto Sans SC', 'Inter', system-ui, sans-serif;
+  --font-display: 'Noto Serif SC', 'Noto Serif', serif;
+}
+
 body {
-  font-family: 'Inter', 'Be Vietnam Pro', 'Noto Sans SC', sans-serif;
+  font-family: var(--font-body);
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -11,35 +27,13 @@ body {
   color: #fff;
 }
 
-/* Vietnamese: Be Vietnam Pro renders diacritics clearly */
 html[data-lang='vi'] body {
-  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
   font-feature-settings: 'kern' 1, 'liga' 1;
 }
 
-/* Chinese Simplified */
-html[data-lang='zh'] body {
-  font-family: 'Noto Sans SC', 'Inter', sans-serif;
-}
-
-html[data-lang='en'] body {
-  font-family: 'Inter', 'Be Vietnam Pro', sans-serif;
-  font-weight: 300;
-}
-
 .font-display {
-  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-family: var(--font-display);
   font-weight: 400;
-}
-
-html[data-lang='vi'] .font-display {
-  font-family: 'Be Vietnam Pro', 'Inter', sans-serif;
-  font-weight: 500;
-}
-
-html[data-lang='zh'] .font-display {
-  font-family: 'Noto Sans SC', 'Inter', sans-serif;
-  font-weight: 500;
 }
 
 html {
@@ -65,11 +59,13 @@ section[id] {
 }
 
 html[data-lang='vi'] .font-label {
+  font-family: 'Inter', system-ui, sans-serif;
   letter-spacing: 0.04em;
   font-weight: 500;
 }
 
 html[data-lang='zh'] .font-label {
+  font-family: 'Noto Sans SC', 'Inter', sans-serif;
   letter-spacing: 0.06em;
   font-weight: 500;
 }
@@ -867,18 +863,12 @@ html[data-lang='zh'] .font-label {
 }
 
 .display-h2 {
-  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(34px, 5.2vw, 68px);
   line-height: 1.06;
   letter-spacing: -0.015em;
   margin: 0 0 32px;
-}
-
-html[data-lang='vi'] .display-h2,
-html[data-lang='zh'] .display-h2 {
-  font-family: inherit;
-  font-weight: 500;
 }
 
 .display-h2 em {
@@ -887,18 +877,12 @@ html[data-lang='zh'] .display-h2 {
 }
 
 .display-h3 {
-  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(24px, 2.6vw, 32px);
   line-height: 1.1;
   letter-spacing: -0.01em;
   margin: 0;
-}
-
-html[data-lang='vi'] .display-h3,
-html[data-lang='zh'] .display-h3 {
-  font-family: inherit;
-  font-weight: 500;
 }
 
 .hero-shell {
@@ -1153,6 +1137,24 @@ html[data-lang='zh'] .display-h3 {
   font-weight: 500;
 }
 
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 44px 0 0;
+  padding: 28px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tool-row li {
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .about-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1170,16 +1172,10 @@ html[data-lang='zh'] .display-h3 {
 }
 
 .about-stats__n {
-  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-family: var(--font-display);
   font-size: clamp(28px, 3.4vw, 44px);
   line-height: 1;
   color: #4ade80;
-}
-
-html[data-lang='vi'] .about-stats__n,
-html[data-lang='zh'] .about-stats__n {
-  font-family: inherit;
-  font-weight: 600;
 }
 
 .about-stats__l {
@@ -1346,18 +1342,12 @@ html[data-lang='zh'] .about-stats__n {
 }
 
 .contact-h {
-  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(36px, 7vw, 88px);
   line-height: 0.98;
   letter-spacing: -0.025em;
   margin: 0 0 28px;
-}
-
-html[data-lang='vi'] .contact-h,
-html[data-lang='zh'] .contact-h {
-  font-family: inherit;
-  font-weight: 500;
 }
 
 .contact-h em {
@@ -1374,16 +1364,10 @@ html[data-lang='zh'] .contact-h {
 }
 
 .social-row__name {
-  font-family: 'Instrument Serif', 'Times New Roman', serif;
+  font-family: var(--font-display);
   font-size: clamp(22px, 3vw, 36px);
   line-height: 1;
   min-width: auto;
-}
-
-html[data-lang='vi'] .social-row__name,
-html[data-lang='zh'] .social-row__name {
-  font-family: inherit;
-  font-weight: 500;
 }
 
 @media (min-width: 768px) {

@@ -307,12 +307,9 @@ export default function App() {
               </Reveal>
             </div>
             <Reveal delay={280}>
-              <ul className="about-stats">
-                {t.stats.map((item) => (
-                  <li key={item.l}>
-                    <span className="about-stats__n">{item.n}</span>
-                    <span className={`${labelFont} about-stats__l`}>{item.l}</span>
-                  </li>
+              <ul className="tool-row">
+                {t.tools.map((item) => (
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
             </Reveal>
@@ -382,16 +379,6 @@ export default function App() {
                   ))}
                 </ul>
                 <p className="craft-card__note">{t.craftAiNote}</p>
-              </article>
-            </Reveal>
-
-            <Reveal delay={140}>
-              <article className="craft-card craft-card--wide">
-                <div className="craft-card__head">
-                  <span className={`${labelFont} craft-card__tag`}>{t.craftHowTag}</span>
-                  <h3 className="display-h3">{t.craftHowTitle}</h3>
-                </div>
-                <p className="craft-card__wide-body">{t.craftHowNote}</p>
               </article>
             </Reveal>
           </div>

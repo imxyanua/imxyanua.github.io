@@ -29,7 +29,7 @@ export type Dictionary = {
   aboutP1: string
   aboutP2: string
   aboutP3: string
-  stats: { n: string; l: string }[]
+  tools: string[]
   craftLabel: string
   craftTitle: string
   craftJobTag: string
@@ -39,9 +39,6 @@ export type Dictionary = {
   craftAiTitle: string
   craftAiLines: string[]
   craftAiNote: string
-  craftHowTag: string
-  craftHowTitle: string
-  craftHowNote: string
   termTitle: string
   termLines: string[]
   workLabel: string
@@ -75,9 +72,9 @@ export const translations: Record<Lang, Dictionary> = {
     heroRole1: 'Cybersecurity',
     heroRole2: 'AI Engineer',
     heroLede:
-      'I look at identity, cloud, and AI agents that can be abused through their own tools.',
+      'Identity, cloud, and AI agents that can be abused through their own tools.',
     heroCtaWork: 'View the work',
-    heroCtaAbout: 'About me',
+    heroCtaAbout: 'About',
     scroll: 'Scroll',
     basedIn: 'Based in',
     basedInVal: 'Vietnam',
@@ -98,19 +95,14 @@ export const translations: Record<Lang, Dictionary> = {
     aboutTitleEm: 'same job.',
     aboutTitle2: 'Find the path, then close it.',
     aboutP1:
-      "I'm xyanua. I live in Vietnam. Most of my time goes into identity and cloud attack paths, and into AI agents that can be abused through their own tools.",
+      'xyanua, based in Vietnam. The work is identity and cloud attack paths, plus AI agents that can be abused through their own tools.',
     aboutP2:
-      'If I find a path, I write the hops so it can be reproduced. Then I help close it and add a detection for the same steps.',
+      'A path gets written as hops so it can be reproduced. Then the hole is closed, and a detection is added for the same steps.',
     aboutP3:
-      'This page is a short intro: how I work, and a few pieces I can talk about.',
-    stats: [
-      { n: 'IdP', l: 'Identity paths' },
-      { n: 'Cloud', l: 'CI and storage' },
-      { n: 'Agents', l: 'Tool abuse' },
-      { n: 'VN', l: 'Based in Vietnam' },
-    ],
+      'Focus is identity, cloud, and agent tool-abuse. Not generic web pentest, not compliance slide decks.',
+    tools: ['AWS', 'OIDC', 'Terraform', 'Python', 'SIEM', 'TypeScript', 'Sigma', 'CI gates'],
     craftLabel: '02 / Craft',
-    craftTitle: 'What I actually do',
+    craftTitle: 'The work',
     craftJobTag: 'day job',
     craftJobTitle: 'Cybersecurity',
     craftJobNote:
@@ -125,11 +117,7 @@ export const translations: Record<Lang, Dictionary> = {
       'Chat surfaces that fail closed',
     ],
     craftAiNote:
-      'Same question as identity work: what can a normal account, or a helpful agent, be talked into?',
-    craftHowTag: 'how it goes',
-    craftHowTitle: 'On a target',
-    craftHowNote:
-      'Draw the trust map. Force a chain that reproduces. Patch the control that failed, then add a rule for that sequence.',
+      'Same question as identity work: what a normal account, or a helpful agent, can be talked into.',
     termTitle: 'xyanua / zsh',
     termLines: [
       '$ whoami',
@@ -145,7 +133,7 @@ export const translations: Record<Lang, Dictionary> = {
     ],
     workLabel: '03 / Work',
     workTitle: 'Selected work',
-    workIntro: 'A few paths I can describe. Open one for the short version.',
+    workIntro: 'A few paths that can be described. Open one for the short version.',
     caseStudy: 'Open →',
     projects: [
       {
@@ -168,9 +156,10 @@ export const translations: Record<Lang, Dictionary> = {
       },
     ],
     talkLabel: '04 / Contact',
-    talkTitle: 'Got a path you cannot prove,',
-    talkTitleEm: 'or an agent you do not fully trust?',
-    talkBody: 'Send the stack and the worry. I will say quickly if it is a proof problem, a detection problem, an agent-guardrail problem, or all three.',
+    talkTitle: 'A path that will not reproduce,',
+    talkTitleEm: 'or an agent that is not fully trusted?',
+    talkBody:
+      'Send the stack and the worry. The reply will say if it is a proof problem, a detection problem, an agent-guardrail problem, or all three.',
     contactEmail: 'Email',
     contactGithub: 'GitHub',
     backTop: 'Back to top',
@@ -192,9 +181,9 @@ export const translations: Record<Lang, Dictionary> = {
     heroRole1: 'Cybersecurity',
     heroRole2: 'AI Engineer',
     heroLede:
-      'Tôi soi identity, cloud, và agent AI bị lạm dụng qua đúng tool của nó.',
+      'Identity, cloud, và agent AI bị lạm dụng qua đúng tool của nó.',
     heroCtaWork: 'Xem việc đã làm',
-    heroCtaAbout: 'Tôi là ai',
+    heroCtaAbout: 'Giới thiệu',
     scroll: 'Cuộn xuống',
     basedIn: 'Đặt tại',
     basedInVal: 'Việt Nam',
@@ -215,18 +204,14 @@ export const translations: Record<Lang, Dictionary> = {
     aboutTitleEm: 'cùng một việc.',
     aboutTitle2: 'Tìm path, rồi đóng lại.',
     aboutP1:
-      'Tôi là xyanua, đang ở Việt Nam. Tôi hay soi identity với cloud, và test agent AI xem tool của nó có bị lạm dụng được không.',
+      'xyanua, đang ở Việt Nam. Việc chính: identity, cloud, và agent AI khi tool bị lạm dụng.',
     aboutP2:
-      'Có path thì tôi ghi từng bước cho tái lập được. Xong vá, rồi gắn detection cho đúng chuỗi đó.',
-    aboutP3: 'Trang này là intro ngắn: cách tôi làm, và vài việc có thể nói.',
-    stats: [
-      { n: 'IdP', l: 'Identity paths' },
-      { n: 'Cloud', l: 'CI và storage' },
-      { n: 'Agents', l: 'Lạm dụng tool' },
-      { n: 'VN', l: 'Đặt tại Việt Nam' },
-    ],
+      'Có path thì ghi từng bước cho tái lập được. Xong vá, rồi gắn detection cho đúng chuỗi đó.',
+    aboutP3:
+      'Trọng tâm là identity, cloud, và lạm dụng tool của agent. Không pentest web generic, không slide compliance.',
+    tools: ['AWS', 'OIDC', 'Terraform', 'Python', 'SIEM', 'TypeScript', 'Sigma', 'CI gates'],
     craftLabel: '02 / Công việc',
-    craftTitle: 'Tôi thực sự làm gì',
+    craftTitle: 'Việc đang làm',
     craftJobTag: 'ngày thường',
     craftJobTitle: 'Cybersecurity',
     craftJobNote:
@@ -241,11 +226,7 @@ export const translations: Record<Lang, Dictionary> = {
       'Chat surface fail-closed',
     ],
     craftAiNote:
-      'Cùng câu hỏi với identity: account thường, hoặc agent “hữu ích”, lạm dụng được gì?',
-    craftHowTag: 'cách làm',
-    craftHowTitle: 'Trên một target',
-    craftHowNote:
-      'Vẽ trust map. Ép ra chuỗi tái lập được. Vá control hỏng, rồi thêm rule cho đúng chuỗi đó.',
+      'Cùng câu hỏi với identity: account thường, hoặc agent “hữu ích”, lạm dụng được gì.',
     termTitle: 'xyanua / zsh',
     termLines: [
       '$ whoami',
@@ -261,7 +242,7 @@ export const translations: Record<Lang, Dictionary> = {
     ],
     workLabel: '03 / Dự án',
     workTitle: 'Việc chọn lọc',
-    workIntro: 'Vài path tôi có thể kể. Mở một cái để đọc bản ngắn.',
+    workIntro: 'Vài path có thể kể. Mở một cái để đọc bản ngắn.',
     caseStudy: 'Mở →',
     projects: [
       {
@@ -285,9 +266,9 @@ export const translations: Record<Lang, Dictionary> = {
     ],
     talkLabel: '04 / Liên hệ',
     talkTitle: 'Có path chưa chứng minh được,',
-    talkTitleEm: 'hoặc agent anh chưa tin hết?',
+    talkTitleEm: 'hoặc agent chưa tin hết?',
     talkBody:
-      'Gửi stack và nỗi sợ. Tôi nói nhanh đó là bài chứng minh, bài detection, bài guardrail agent, hay cả ba.',
+      'Gửi stack và nỗi sợ. Sẽ nói nhanh đó là bài chứng minh, bài detection, bài guardrail agent, hay cả ba.',
     contactEmail: 'Email',
     contactGithub: 'GitHub',
     backTop: 'Về đầu trang',
@@ -308,9 +289,9 @@ export const translations: Record<Lang, Dictionary> = {
     closeMenu: '关闭菜单',
     heroRole1: '网络安全',
     heroRole2: 'AI 工程师',
-    heroLede: '我看身份、云，以及会通过自身工具被滥用的 AI Agent。',
+    heroLede: '身份、云，以及会通过自身工具被滥用的 AI Agent。',
     heroCtaWork: '看作品',
-    heroCtaAbout: '我是谁',
+    heroCtaAbout: '关于',
     scroll: '向下滚动',
     basedIn: '所在地',
     basedInVal: '越南',
@@ -331,17 +312,12 @@ export const translations: Record<Lang, Dictionary> = {
     aboutTitleEm: '同一件事。',
     aboutTitle2: '找到路径，再关上它。',
     aboutP1:
-      '我是 xyanua，在越南。我主要看身份和云上的路径，也测带工具的 AI Agent 会不会被顺着正常流程滥用。',
-    aboutP2: '找到路径我就按步骤写下来，方便复现。然后修，再给同一串动作补检测。',
-    aboutP3: '这页是一段短介绍：我怎么做，以及几件可以说的事。',
-    stats: [
-      { n: 'IdP', l: '身份路径' },
-      { n: 'Cloud', l: 'CI 与存储' },
-      { n: 'Agents', l: '工具滥用' },
-      { n: 'VN', l: '在越南' },
-    ],
+      'xyanua，在越南。主业是身份与云上的路径，以及带工具的 AI Agent 会不会被顺着正常流程滥用。',
+    aboutP2: '找到路径就按步骤写下来，方便复现。然后修，再给同一串动作补检测。',
+    aboutP3: '重心是身份、云、Agent 工具滥用。不做泛泛的 Web 渗透，也不做合规幻灯片。',
+    tools: ['AWS', 'OIDC', 'Terraform', 'Python', 'SIEM', 'TypeScript', 'Sigma', 'CI gates'],
     craftLabel: '02 / 工作',
-    craftTitle: '我实际在做的事',
+    craftTitle: '在做的事',
     craftJobTag: '日常',
     craftJobTitle: '网络安全',
     craftJobNote: '联邦缺口、角色串联、存储策略错误。按移动来画，再补检测关上。',
@@ -354,10 +330,7 @@ export const translations: Record<Lang, Dictionary> = {
       '对已知攻击做评估',
       '失败即关闭的聊天面',
     ],
-    craftAiNote: '和身份工作同一句问：普通账号，或一个热心 Agent，能被哄去做什么？',
-    craftHowTag: '做法',
-    craftHowTitle: '面对一个目标',
-    craftHowNote: '画出信任图。逼出可复现的链路。修补失效控制，再给同一序列加规则。',
+    craftAiNote: '和身份工作同一句问：普通账号，或一个热心 Agent，能被哄去做什么。',
     termTitle: 'xyanua / zsh',
     termLines: [
       '$ whoami',
@@ -373,7 +346,7 @@ export const translations: Record<Lang, Dictionary> = {
     ],
     workLabel: '03 / 项目',
     workTitle: '精选工作',
-    workIntro: '几条我能讲的路径。点开看短版。',
+    workIntro: '几条可以讲的路径。点开看短版。',
     caseStudy: '打开 →',
     projects: [
       {
@@ -396,9 +369,9 @@ export const translations: Record<Lang, Dictionary> = {
       },
     ],
     talkLabel: '04 / 联系',
-    talkTitle: '有条路径你证不出来，',
-    talkTitleEm: '或一个你不敢全信的 Agent？',
-    talkBody: '把栈和担忧发来。我会很快判断这是证明、检测、Agent 护栏，还是三者都有。',
+    talkTitle: '有条路径证不出来，',
+    talkTitleEm: '或一个不敢全信的 Agent？',
+    talkBody: '把栈和担忧发来。很快能判断这是证明、检测、Agent 护栏，还是三者都有。',
     contactEmail: '邮箱',
     contactGithub: 'GitHub',
     backTop: '回到顶部',
